@@ -13,11 +13,13 @@ import {MdButtonModule,
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
+import { SalonsComponent } from './salons/salons.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    SalonsComponent
   ],
   imports: [
     BrowserModule,
