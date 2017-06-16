@@ -6,21 +6,21 @@
             <input md-input [(ngModel)]="location" name="location" >  
             
             <label>Distance:</label>
-            <md-select>
+            <md-select [(ngModel)]="distance" name="distance">
                 <md-option value="1">1km</md-option>
                 <md-option value="5">5km</md-option>
                 <md-option value="10">10km</md-option>
             </md-select>
             
             <label>Date:</label>
-            <input md-input name="date">   
+            <input md-input name="date" [(ngModel)]="date">   
             
             <label>From:</label>
-            <input md-input name="from">  
+            <input md-input name="from" [(ngModel)]="from">  
             
             <label>To:</label>
-            <input md-input name="to">  
-            <button md-button>SEARCH</button>    
+            <input md-input name="to" [(ngModel)]="to">  
+            <button md-button (click)="search()">SEARCH</button>    
         </md-card>
         
         <md-card>

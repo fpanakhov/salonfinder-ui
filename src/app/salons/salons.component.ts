@@ -23,10 +23,18 @@ export class SalonsComponent implements OnInit {
     
     this.salonsService.getSalons()
       .subscribe(
-        salons => this.salons = salons,
+        salons => {
+            var arr: any[] = [];
+            salons.filter(s => s.address == this.location).map(s => arr.push(s));
+            this.salons = arr;
+        },
         error => console.error('Error: ' + error),
         () => console.log('Completed!')
       );;
+  }
+  
+  search(){
+    this.getSalons();
   }
 
   ngOnInit() {
