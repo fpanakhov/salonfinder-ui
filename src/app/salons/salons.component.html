@@ -1,3 +1,53 @@
-<p>
-  salons works!
-</p>
+
+<form name="searchForm">
+    <div layout="row">
+        <md-card>
+            <label>Location:</label>
+            <input md-input [(ngModel)]="location" name="location" >  
+            
+            <label>Distance:</label>
+            <md-select>
+                <md-option value="1">1km</md-option>
+                <md-option value="5">5km</md-option>
+                <md-option value="10">10km</md-option>
+            </md-select>
+            
+            <label>Date:</label>
+            <input md-input name="date">   
+            
+            <label>From:</label>
+            <input md-input name="from">  
+            
+            <label>To:</label>
+            <input md-input name="to">  
+            <button md-button>SEARCH</button>    
+        </md-card>
+        
+        <md-card>
+            <md-checkbox name="serv" value="1">haircut</md-checkbox>
+            <md-checkbox name="serv" value="2">massage</md-checkbox>
+            <md-checkbox name="serv" value="3">sauna</md-checkbox>
+            <md-checkbox name="serv" value="4">nails</md-checkbox>
+            <md-checkbox name="serv" value="5">beardcut</md-checkbox>
+            <md-checkbox name="serv" value="6">beard coloring</md-checkbox>
+            <md-checkbox name="serv" value="7">styling</md-checkbox>
+            <md-checkbox name="serv" value="8">shaving</md-checkbox>
+            <md-checkbox name="serv" value="9">manicure</md-checkbox>
+            <md-checkbox name="serv" value="10">pedicure</md-checkbox>
+            <md-checkbox name="serv" value="11">women's cut</md-checkbox>
+            <md-checkbox name="serv" value="12">irokez</md-checkbox>
+        </md-card>
+
+    </div>
+</form>
+
+
+<li *ngFor="let salon of salons" >
+<md-card>
+  <div class="view">
+    <span>{{salon.name}}</span>
+    <span>{{salon.address}}</span>
+    <button>BOOK</button>
+  </div>
+</md-card>
+</li>
