@@ -19,6 +19,8 @@ import {MaterialModule,
         MdDatepickerModule,
         MdGridListModule} from '@angular/material';
 
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { SalonsComponent } from './salons/salons.component';
@@ -41,6 +43,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     MaterialModule, FormsModule,
     MdButtonModule, MdCheckboxModule, MdInputModule, MdToolbarModule, MdMenuModule, MdSelectModule, MdIconModule, MdGridListModule, MdDatepickerModule,
+    FlexLayoutModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [],

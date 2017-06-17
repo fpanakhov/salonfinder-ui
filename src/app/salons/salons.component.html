@@ -22,23 +22,43 @@
             <input md-input name="to" [(ngModel)]="to">  
             <button md-button (click)="search()">SEARCH</button>    
         </md-card>
-        
-        <md-card>
-            <md-checkbox name="serv" value="1">haircut</md-checkbox>
-            <md-checkbox name="serv" value="2">massage</md-checkbox>
-            <md-checkbox name="serv" value="3">sauna</md-checkbox>
-            <md-checkbox name="serv" value="4">nails</md-checkbox>
-            <md-checkbox name="serv" value="5">beardcut</md-checkbox>
-            <md-checkbox name="serv" value="6">beard coloring</md-checkbox>
-            <md-checkbox name="serv" value="7">styling</md-checkbox>
-            <md-checkbox name="serv" value="8">shaving</md-checkbox>
-            <md-checkbox name="serv" value="9">manicure</md-checkbox>
-            <md-checkbox name="serv" value="10">pedicure</md-checkbox>
-            <md-checkbox name="serv" value="11">women's cut</md-checkbox>
-            <md-checkbox name="serv" value="12">irokez</md-checkbox>
-        </md-card>
+    </div>  
 
+    <div fxLayout="row">
+        <div fxFlex="33">
+            <ul>
+            <li><md-checkbox name="serv" value="1">haircut</md-checkbox></li>
+            <li><md-checkbox name="serv" value="2">massage</md-checkbox></li>
+            <li><md-checkbox name="serv" value="3">sauna</md-checkbox></li>
+            </ul>
+        </div>
+            
+        <div fxFlex="33">
+            <ul>
+            <li><md-checkbox name="serv" value="4">nails</md-checkbox></li>
+            <li><md-checkbox name="serv" value="5">beardcut</md-checkbox></li>
+            <li><md-checkbox name="serv" value="6">beard coloring</md-checkbox></li>
+            </ul>
+            </div>
+            
+        <div fxFlex="33">
+            <ul>
+            <li><md-checkbox name="serv" value="7">styling</md-checkbox></li>
+            <li><md-checkbox name="serv" value="8">shaving</md-checkbox></li>
+            <li><md-checkbox name="serv" value="9">manicure</md-checkbox></li>
+            </ul>
+        </div>
+            
+            
+        <div fxFlex="33">
+            <ul>
+            <li><md-checkbox name="serv" value="10">pedicure</md-checkbox></li>
+            <li><md-checkbox name="serv" value="11">women's cut</md-checkbox></li>
+            <li><md-checkbox name="serv" value="12">irokez</md-checkbox></li>
+            </ul>
+        </div>
     </div>
+    
 </form>
 
 
