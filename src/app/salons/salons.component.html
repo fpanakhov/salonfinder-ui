@@ -1,17 +1,21 @@
 
 <form name="searchForm">
-    <div layout="row">
-        <md-card>
-            <label>Location:</label>
-            <input md-input [(ngModel)]="location" name="location" >  
-            
-            <label>Distance:</label>
-            <md-select [(ngModel)]="distance" name="distance">
-                <md-option value="1">1km</md-option>
-                <md-option value="5">5km</md-option>
-                <md-option value="10">10km</md-option>
-            </md-select>
-            
+    <md-card>
+        <div fxLayout="row">
+            <div fxFlex="40">
+                <label>Location:</label>
+                <input md-input [(ngModel)]="location" name="location" >  
+            </div>  
+            <div fxFlex> 
+                <label>Distance:</label>
+                <md-select [(ngModel)]="distance" name="distance">
+                    <md-option value="1">1km</md-option>
+                    <md-option value="5">5km</md-option>
+                    <md-option value="10">10km</md-option>
+                </md-select>
+            </div> 
+        </div>
+        <div layout="row">
             <label>Date:</label>
             <input md-input name="date" [(ngModel)]="date">   
             
@@ -20,9 +24,9 @@
             
             <label>To:</label>
             <input md-input name="to" [(ngModel)]="to">  
-            <button md-button (click)="search()">SEARCH</button>    
-        </md-card>
-    </div>  
+            <button md-button (click)="search()">SEARCH</button>  
+        </div>    
+    </md-card>
 
     <div fxLayout="row">
         <div fxFlex="33">
@@ -32,15 +36,13 @@
             <li><md-checkbox name="serv" value="3">sauna</md-checkbox></li>
             </ul>
         </div>
-            
         <div fxFlex="33">
             <ul>
             <li><md-checkbox name="serv" value="4">nails</md-checkbox></li>
             <li><md-checkbox name="serv" value="5">beardcut</md-checkbox></li>
             <li><md-checkbox name="serv" value="6">beard coloring</md-checkbox></li>
             </ul>
-            </div>
-            
+        </div>
         <div fxFlex="33">
             <ul>
             <li><md-checkbox name="serv" value="7">styling</md-checkbox></li>
@@ -48,8 +50,6 @@
             <li><md-checkbox name="serv" value="9">manicure</md-checkbox></li>
             </ul>
         </div>
-            
-            
         <div fxFlex="33">
             <ul>
             <li><md-checkbox name="serv" value="10">pedicure</md-checkbox></li>
@@ -65,8 +65,8 @@
 <li *ngFor="let salon of salons" >
 <md-card>
   <div class="view">
-    <span>{{salon.name}}</span>
-    <span>{{salon.address}}</span>
+    <div>{{salon.name}}</div>
+    <div>{{salon.address}}</div>
     <button>BOOK</button>
   </div>
 </md-card>
