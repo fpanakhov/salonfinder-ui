@@ -2,67 +2,84 @@ import { Component, OnInit } from '@angular/core';
 import { SalonsService } from './salons.service';
 
 @Component({
-    selector: 'app-salons',
-    templateUrl: './salons.component.html',
-    styleUrls: ['./salons.component.css'],
-    providers: [SalonsService]
+  selector: 'app-salons',
+  templateUrl: './salons.component.html',
+  styleUrls: ['./salons.component.css'],
+  providers: [SalonsService]
 })
 
 export class SalonsComponent implements OnInit {
 
-    location: String = 'Munich';
-    distance: Number = 1;
-    
-    public input1Moment: any;
-    public input2Moment: any;
+  location: String = 'Munich';
+  distance: string = '10000'; // = { name: '10km', value: '10000', disabled: false };
 
-    private salons;
+  public input1Moment: any;
+  public input2Moment: any;
 
-    constructor(private salonsService: SalonsService) { }
-  
-    locationMatches(salon){
-        let l = this.location;
-        if(typeof l =='undefined' || !l){
-            return true;
-        }
-        // TODO: check distance with googlemaps
-        return salon.address == l;
-    }
-    
-    dateMatches(salon){
-        return true; // TODO
-    }
-    
-    fromtoMatches(salon){
-        return true; //TODO
-    }
-  
-    getSalons(){
-        //return this.salonsService.getSalonsLocal().then(salons => {
-        //  this.salons = salons;
-        //});
-    
+  private salons;
+
+  constructor(private salonsService: SalonsService) { }
+
+
+  filterByLocation(arr){
+    var origins: string = '';
+    arr.map((item, index) => { origins+=item.address; origins+='|'; });
+
+    this.salonsService
+      .getDistanceMatrix(origins.substring(0, origins.length-1), this.location)
+      .subscribe(
+        resp => {
+          var addresses: string = resp.origin_addresses;
+          for (var i = 0; i < addresses.length; i++) {
+            var dist = resp.rows[i].elements[0].distance.value;
+            arr[i].distance = dist;
+          }
+
+          var arr1: any[] = [];
+          for (var i=0; i<arr.length; i++){
+            if (arr[i].distance <= this.distance) arr1.push(arr[i]);
+          }
+          this.salons = arr1;
+        },
+        error => { this.location = error; },
+        () => {} );
+  }
+
+
+  dateMatches(salon){
+    return true; // TODO
+  }
+
+  fromtoMatches(salon){
+    return true; //TODO
+  }
+
+  getSalons(){
+    //return this.salonsService.getSalonsLocal().then(salons => {
+    //  this.salons = salons;
+    //});
+
     this.salonsService.getSalons()
-        .subscribe(
-            salons => {
-                var arr: any[] = [];
-                salons
-                    .filter(s => this.locationMatches(s))
-                    .filter(s => this.dateMatches(s))
-                    .filter(s => this.fromtoMatches(s))
-                    .map(s => arr.push(s));
-                this.salons = arr;
-            },
-            error => console.error('Error: ' + error),
-            () => console.log('Completed!')
-        );
-    }
-    
-    search(){
-        this.getSalons();
-    }
-    
-    ngOnInit() {
-        this.getSalons();
-    }
+      .subscribe(
+        salons => {
+          var arr: any[] = [];
+          salons
+            .filter(s => this.dateMatches(s))
+            .filter(s => this.fromtoMatches(s))
+            .map(s => arr.push(s));
+
+          this.filterByLocation(arr);
+        },
+        error => console.error('Error: ' + error),
+        () => console.log('Completed!')
+      );
+  }
+
+  search(){
+    this.getSalons();
+  }
+
+  ngOnInit() {
+    this.getSalons();
+  }
 }

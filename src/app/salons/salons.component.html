@@ -1,75 +1,76 @@
 
 <form name="searchForm">
-    <md-card>
-        <div fxLayout="row">
-            <div fxFlex="50">
-                <label>Location:</label>
-                <input md-input [(ngModel)]="location" name="location" >
-                <!--<table class="example-full-width" cellspacing="0"><tr>
-                    <td><md-input-container class="example-full-width">
-                    <input mdInput placeholder="Location">
-                    </md-input-container></td></tr>
-                </table>-->
-            </div>  
-            <div fxFlex="20"> 
-                <label style="margin-right:15px;">Within:</label>
-                <md-select [(ngModel)]="distance" name="distance">
-                    <md-option value="1">1km</md-option>
-                    <md-option value="5">5km</md-option>
-                    <md-option value="10">10km</md-option>
-                </md-select>
-            </div> 
-        </div>
-        <div layout="row">
-            <label>Date:</label>
-            <!--<input md-input name="date" [(ngModel)]="date">  -->
-            <material-datepicker [(date)]="yourModelDate"></material-datepicker> 
-            
-            <label for="from" style="margin-left:15px;">From:</label>
-            <!--<input md-input name="from" [(ngModel)]="from">  -->
-            <input id="from" class="picker-input" name="from" [ngModel]="input1Moment | date: 'HH:mm'"
-             [(dateTimePicker)]="input1Moment" [pickerType]="'time'" [style.width]= "'150px'" [theme]="'#444'" readonly>
-            
-            <label for="to" style="margin-left:5px;">To:</label>
-            <input id="to" class="picker-input" name="to" [ngModel]="input2Moment | date: 'HH:mm'"
-             [(dateTimePicker)]="input2Moment" [pickerType]="'time'" [style.width]= "'150px'" [theme]="'#444'" readonly>
-            
-            <button md-button (click)="search()" style="margin-left:5px;">SEARCH</button>  
-        </div>    
-    </md-card>
+  <md-card>
+    <div fxLayout="row">
+      <div fxFlex="50">
+        <label>Location:</label>
+        <input md-input [(ngModel)]="location" name="location" >
+        <!--<table class="example-full-width" cellspacing="0"><tr>
+            <td><md-input-container class="example-full-width">
+            <input mdInput placeholder="Location">
+            </md-input-container></td></tr>
+        </table>-->
+      </div>
 
-    <div fxLayout="row" id="salons-div">
-        <div fxFlex="20">
-            <md-checkbox name="serv" value="1">haircut</md-checkbox> <br>
-            <md-checkbox name="serv" value="2">massage</md-checkbox> <br>
-            <md-checkbox name="serv" value="3">sauna</md-checkbox> <br>
-        </div>
-        <div fxFlex="20">
-            <md-checkbox name="serv" value="4">nails</md-checkbox> <br>
-            <md-checkbox name="serv" value="5">beardcut</md-checkbox> <br>
-            <md-checkbox name="serv" value="6">beard coloring</md-checkbox> <br>
-        </div>
-        <div fxFlex="20">
-            <md-checkbox name="serv" value="7">styling</md-checkbox> <br>
-            <md-checkbox name="serv" value="8">shaving</md-checkbox> <br>
-            <md-checkbox name="serv" value="9">manicure</md-checkbox> <br>
-        </div>
-        <div fxFlex="20">
-            <md-checkbox name="serv" value="10">pedicure</md-checkbox> <br>
-            <md-checkbox name="serv" value="11">women's cut</md-checkbox> <br>
-            <md-checkbox name="serv" value="12">irokez</md-checkbox> <br>
-        </div>
+      <div fxFlex="20">
+        <label>Distance:</label>
+        <md-select [(ngModel)]="distance" name="distance">
+          <md-option value="1000">1000</md-option>
+          <md-option value="5000">5000</md-option>
+          <md-option value="10000">10000</md-option>
+        </md-select>
+        meters
+      </div>
     </div>
-    
+    <div layout="row">
+      <label>Date:</label>
+      <!--<input md-input name="date" [(ngModel)]="date">  -->
+      <material-datepicker [(date)]="yourModelDate"></material-datepicker>
+
+      <label for="from" style="margin-left:15px;">From:</label>
+      <!--<input md-input name="from" [(ngModel)]="from">  -->
+      <input id="from" class="picker-input" name="from" [ngModel]="input1Moment | date: 'HH:mm'"
+             [(dateTimePicker)]="input1Moment" [pickerType]="'time'" [style.width]= "'150px'" [theme]="'#444'" readonly>
+
+      <label for="to" style="margin-left:5px;">To:</label>
+      <input id="to" class="picker-input" name="to" [ngModel]="input2Moment | date: 'HH:mm'"
+             [(dateTimePicker)]="input2Moment" [pickerType]="'time'" [style.width]= "'150px'" [theme]="'#444'" readonly>
+
+      <button md-button (click)="search()" style="margin-left:5px;">SEARCH</button>
+    </div>
+  </md-card>
+
+  <div fxLayout="row" id="salons-div">
+    <div fxFlex="20">
+      <md-checkbox name="serv" value="1">haircut</md-checkbox> <br>
+      <md-checkbox name="serv" value="2">massage</md-checkbox> <br>
+      <md-checkbox name="serv" value="3">sauna</md-checkbox> <br>
+    </div>
+    <div fxFlex="20">
+      <md-checkbox name="serv" value="4">nails</md-checkbox> <br>
+      <md-checkbox name="serv" value="5">beardcut</md-checkbox> <br>
+      <md-checkbox name="serv" value="6">beard coloring</md-checkbox> <br>
+    </div>
+    <div fxFlex="20">
+      <md-checkbox name="serv" value="7">styling</md-checkbox> <br>
+      <md-checkbox name="serv" value="8">shaving</md-checkbox> <br>
+      <md-checkbox name="serv" value="9">manicure</md-checkbox> <br>
+    </div>
+    <div fxFlex="20">
+      <md-checkbox name="serv" value="10">pedicure</md-checkbox> <br>
+      <md-checkbox name="serv" value="11">women's cut</md-checkbox> <br>
+      <md-checkbox name="serv" value="12">irokez</md-checkbox> <br>
+    </div>
+  </div>
 </form>
 
 
 <li *ngFor="let salon of salons" >
-<md-card>
-  <div class="view">
-    <div>{{salon.name}}</div>
-    <div>{{salon.address}}</div>
-    <button>BOOK</button>
-  </div>
-</md-card>
+  <md-card>
+    <div class="view">
+      <div>{{salon.name}}</div>
+      <div>{{salon.address}}</div>
+      <button>BOOK</button>
+    </div>
+  </md-card>
 </li>

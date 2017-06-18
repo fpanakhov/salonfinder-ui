@@ -29,6 +29,7 @@ import 'hammerjs';
 
 import { DatepickerModule } from 'angular2-material-datepicker';
 import { DateTimePickerModule } from 'ng-pick-datetime';
+import { SearchResultComponent } from './search-result/search-result.component';
 
 const appRoutes: Routes = [
   { path: 'salons', component: SalonsComponent },
@@ -39,7 +40,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     HeaderComponent,
-    SalonsComponent
+    SalonsComponent,
+    SearchResultComponent
   ],
   imports: [
     BrowserModule,
