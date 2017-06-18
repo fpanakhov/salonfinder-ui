@@ -24,7 +24,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { SalonsComponent } from './salons/salons.component';
+import 'hammerjs';
 
+import { DatepickerModule } from 'angular2-material-datepicker';
+import { DateTimePickerModule } from 'ng-pick-datetime';
 
 const appRoutes: Routes = [
   { path: 'salons', component: SalonsComponent },
@@ -44,7 +47,9 @@ const appRoutes: Routes = [
     MaterialModule, FormsModule,
     MdButtonModule, MdCheckboxModule, MdInputModule, MdToolbarModule, MdMenuModule, MdSelectModule, MdIconModule, MdGridListModule, MdDatepickerModule,
     FlexLayoutModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    DatepickerModule,
+    DateTimePickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -17,13 +17,18 @@
         </div>
         <div layout="row">
             <label>Date:</label>
-            <input md-input name="date" [(ngModel)]="date">   
+            <!--<input md-input name="date" [(ngModel)]="date">  -->
+            <material-datepicker [(date)]="yourModelDate"></material-datepicker> 
             
-            <label>From:</label>
-            <input md-input name="from" [(ngModel)]="from">  
+            <label for="from">From:</label>
+            <!--<input md-input name="from" [(ngModel)]="from">  -->
+            <input class="picker-input" id="from" name="from" [ngModel]="moment | date: 'short'"
+             [(dateTimePicker)]="moment" [pickerType]="'time'" readonly>
             
-            <label>To:</label>
-            <input md-input name="to" [(ngModel)]="to">  
+            <label for="to">To:</label>
+            <input class="picker-input" id="to" name="to" [ngModel]="moment | date: 'short'"
+             [(dateTimePicker)]="moment" [pickerType]="'time'" readonly>
+            
             <button md-button (click)="search()">SEARCH</button>  
         </div>    
     </md-card>
