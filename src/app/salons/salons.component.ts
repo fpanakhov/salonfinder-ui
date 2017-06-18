@@ -13,6 +13,9 @@ export class SalonsComponent implements OnInit {
     location: String = 'Munich';
     distance: Number = 1;
     
+    public input1Moment: any;
+    public input2Moment: any;
+
     private salons;
 
     constructor(private salonsService: SalonsService) { }

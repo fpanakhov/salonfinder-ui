@@ -27,14 +27,14 @@
             
             <label for="from" style="margin-left:15px;">From:</label>
             <!--<input md-input name="from" [(ngModel)]="from">  -->
-            <input id="from" class="picker-input" name="from" [ngModel]="moment | date: 'short'"
-             [(dateTimePicker)]="moment" [pickerType]="'time'" [style.width]= "'150px'" [theme]="'#444'" readonly>
+            <input id="from" class="picker-input" name="from" [ngModel]="input1Moment | date: 'HH:mm'"
+             [(dateTimePicker)]="input1Moment" [pickerType]="'time'" [style.width]= "'150px'" [theme]="'#444'" readonly>
             
             <label for="to" style="margin-left:5px;">To:</label>
-            <input id="to" class="picker-input" name="to" [ngModel]="moment | date: 'short'"
-             [(dateTimePicker)]="moment" [pickerType]="'time'" [style.width]= "'150px'" [theme]="'#444'" readonly>
+            <input id="to" class="picker-input" name="to" [ngModel]="input2Moment | date: 'HH:mm'"
+             [(dateTimePicker)]="input2Moment" [pickerType]="'time'" [style.width]= "'150px'" [theme]="'#444'" readonly>
             
-            <button md-button (click)="search()">SEARCH</button>  
+            <button md-button (click)="search()" style="margin-left:5px;">SEARCH</button>  
         </div>    
     </md-card>
 
