@@ -17,7 +17,8 @@ import {MaterialModule,
         MdSelectModule,
         MdIconModule,
         MdDatepickerModule,
-        MdGridListModule} from '@angular/material';
+        MdGridListModule,
+        MdIconRegistry} from '@angular/material';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -51,7 +52,7 @@ const appRoutes: Routes = [
     DatepickerModule,
     DateTimePickerModule
   ],
-  providers: [],
+  providers: [MdIconRegistry],
   bootstrap: [AppComponent]
 })
 

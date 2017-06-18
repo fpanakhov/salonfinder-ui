@@ -25,3 +25,9 @@ md-toolbar-row {
   right: 15%;
   background: white;
 }
+
+label {
+  color: #444;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: lighter;
+}
