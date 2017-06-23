@@ -21,9 +21,20 @@ export class SearchResultComponent implements OnInit {
   selectedTimeSlot:string;
 
   constructor() {
+    console.log(this.services);
+  }
+
+  calculateEstimatedPrice(services){
+    let estPrice = 0;
+    for(let i = 0 ; i < services.length;i++){
+      estPrice += services[i].price;
+    }
+    return estPrice
   }
 
   ngOnInit() {
+    console.log(this.services);
+    this.price = this.calculateEstimatedPrice(this.services);
   }
 
 }
