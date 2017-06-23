@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { SalonsService } from './salons.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { SalonsService } from './salons.service';
 export class SalonsComponent implements OnInit {
 
   location: string = 'Munich';
-  distance: number = 1; // = { name: '10km', value: '10000', disabled: false };
+  distance: number = 10; // = { name: '10km', value: '10000', disabled: false };
 
   public input1Moment: any;
   public input2Moment: any;
@@ -19,8 +19,6 @@ export class SalonsComponent implements OnInit {
   private salons;
 
   constructor(private salonsService: SalonsService) { }
-
-
   filterByLocation(arr){
     console.log(this.distance);
     var origins: string = '';
@@ -47,6 +45,7 @@ export class SalonsComponent implements OnInit {
             }
           }
           this.salons = arr1;
+          console.log(this.salons);
         },
         error => { this.location = error; },
         () => {} );
