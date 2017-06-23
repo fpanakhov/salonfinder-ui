@@ -32,6 +32,7 @@ import { DatepickerModule } from 'angular2-material-datepicker';
 import { DateTimePickerModule } from 'ng-pick-datetime';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { HomeComponent } from './home/home.component';
+import { RegisterSalonComponent } from './register-salon/register-salon.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent },
@@ -45,7 +46,8 @@ const appRoutes: Routes = [
     HeaderComponent,
     SalonsComponent,
     SearchResultComponent,
-    HomeComponent
+    HomeComponent,
+    RegisterSalonComponent
   ],
   imports: [
     BrowserModule,

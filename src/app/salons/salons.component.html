@@ -59,10 +59,9 @@
   </md-card>
 </form>
 
-<li *ngFor="let salon of salons" >
-  <app-search-result [name]="salon.name"
-                     [address]="salon.address"
-                     [services]="salon.services"
-                     [distance]="salon.distance"
-                     [timeslots]="salon.schedule"></app-search-result>
-</li>
+<app-search-result *ngFor="let salon of salons" [name]="salon.name"
+                   [address]="salon.address"
+                   [services]="salon.services"
+                   [distance]="salon.distance"
+                   [timeslots]="salon.schedule"></app-search-result>
+
