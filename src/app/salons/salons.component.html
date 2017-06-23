@@ -2,66 +2,62 @@
 <form name="searchForm">
   <md-card>
     <div fxLayout="row">
-      <div fxFlex="50">
-        <label>Location:</label>
-        <input md-input [(ngModel)]="location" name="location" >
-        <!--<table class="example-full-width" cellspacing="0"><tr>
-            <td><md-input-container class="example-full-width">
-            <input mdInput placeholder="Location">
-            </md-input-container></td></tr>
-        </table>-->
-      </div>
+        <md-input-container fxFlexOffset="25" fxFlex="25">
+          <input mdInput placeholder="Location" [(ngModel)]="location" name="location" >
+        </md-input-container>
 
-      <div fxFlex="20">
-        <label>Distance:</label>
-        <md-select [(ngModel)]="distance" name="distance">
-          <md-option value="1000">1000</md-option>
-          <md-option value="5000">5000</md-option>
-          <md-option value="10000">10000</md-option>
-        </md-select>
-        meters
+      <div fxFlexOffset="5" fxFlex="25" fxLayout="column" style="text-align: left">
+        <label fxFlex="20" style="color: #aaaaaa;font-size: 12px">Distance</label>
+        <md-slider fxFlex="80" [(ngModel)]="distance" name="distance"
+                   [max]="10"
+                   [min]="1"
+                   [step]="2"
+                   [thumb-label]="true" placeholder="Distance"></md-slider>
       </div>
     </div>
-    <div layout="row">
-      <label>Date:</label>
-      <!--<input md-input name="date" [(ngModel)]="date">  -->
-      <material-datepicker [(date)]="yourModelDate"></material-datepicker>
+    <div fxLayout="row">
+      <md-input-container fxFlexOffset="25" fxFlex="25">
+        <input mdInput [mdDatepicker]="picker" placeholder="Date">
+        <button mdSuffix [mdDatepickerToggle]="picker"></button>
+      </md-input-container>
+      <md-datepicker #picker></md-datepicker>
 
-      <label for="from" style="margin-left:15px;">From:</label>
-      <!--<input md-input name="from" [(ngModel)]="from">  -->
-      <input id="from" class="picker-input" name="from" [ngModel]="input1Moment | date: 'HH:mm'"
-             [(dateTimePicker)]="input1Moment" [pickerType]="'time'" [style.width]= "'150px'" [theme]="'#444'" readonly>
-
-      <label for="to" style="margin-left:5px;">To:</label>
-      <input id="to" class="picker-input" name="to" [ngModel]="input2Moment | date: 'HH:mm'"
-             [(dateTimePicker)]="input2Moment" [pickerType]="'time'" [style.width]= "'150px'" [theme]="'#444'" readonly>
-
-      <button md-button (click)="search()" style="margin-left:5px;">SEARCH</button>
+      <div fxFlexOffset="5" fxFlex="25" fxLayout="row" style="text-align: left">
+        <md-input-container fxFlex="45">
+          <input mdInput type="time" placeholder="From">
+        </md-input-container>
+        <md-input-container fxFlexOffset="10" fxFlex="45">
+          <input mdInput type="time" placeholder="To">
+        </md-input-container>
+      </div>
+    </div>
+    <div fxLayout="row">
+      <div fxFlexOffset="70">
+        <button md-raised-button class="mat-accent" (click)="search()">SEARCH</button>
+      </div>
     </div>
   </md-card>
 
-  <div fxLayout="row" id="salons-div">
-    <div fxFlex="20">
-      <md-checkbox name="serv" value="1">haircut</md-checkbox> <br>
-      <md-checkbox name="serv" value="2">massage</md-checkbox> <br>
-      <md-checkbox name="serv" value="3">sauna</md-checkbox> <br>
+  <md-card>
+    <div fxLayout="row" fxFlexOffset="20" style="text-align: left">
+        <md-checkbox fxFlex="20" name="serv" value="1">haircut</md-checkbox>
+        <md-checkbox fxFlex="20" name="serv" value="4">nails</md-checkbox>
+        <md-checkbox fxFlex="20" name="serv" value="7">styling</md-checkbox>
+        <md-checkbox fxFlex="20" name="serv" value="10">pedicure</md-checkbox>
     </div>
-    <div fxFlex="20">
-      <md-checkbox name="serv" value="4">nails</md-checkbox> <br>
-      <md-checkbox name="serv" value="5">beardcut</md-checkbox> <br>
-      <md-checkbox name="serv" value="6">beard coloring</md-checkbox> <br>
+    <div fxLayout="row" fxFlexOffset="20" style="text-align: left">
+        <md-checkbox fxFlex="20" name="serv" value="2">massage</md-checkbox>
+        <md-checkbox fxFlex="20" name="serv" value="5">beardcut</md-checkbox>
+        <md-checkbox fxFlex="20" name="serv" value="8">shaving</md-checkbox>
+        <md-checkbox fxFlex="20" name="serv" value="11">women's cut</md-checkbox>
     </div>
-    <div fxFlex="20">
-      <md-checkbox name="serv" value="7">styling</md-checkbox> <br>
-      <md-checkbox name="serv" value="8">shaving</md-checkbox> <br>
-      <md-checkbox name="serv" value="9">manicure</md-checkbox> <br>
+    <div fxLayout="row" fxFlexOffset="20" style="text-align: left">
+        <md-checkbox fxFlex="20" name="serv" value="3">sauna</md-checkbox>
+        <md-checkbox fxFlex="20" name="serv" value="6">beard coloring</md-checkbox>
+        <md-checkbox fxFlex="20" name="serv" value="9">manicure</md-checkbox>
+        <md-checkbox fxFlex="20" name="serv" value="12">irokez</md-checkbox>
     </div>
-    <div fxFlex="20">
-      <md-checkbox name="serv" value="10">pedicure</md-checkbox> <br>
-      <md-checkbox name="serv" value="11">women's cut</md-checkbox> <br>
-      <md-checkbox name="serv" value="12">irokez</md-checkbox> <br>
-    </div>
-  </div>
+  </md-card>
 </form>
 
 

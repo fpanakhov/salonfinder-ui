@@ -10,8 +10,8 @@ import { SalonsService } from './salons.service';
 
 export class SalonsComponent implements OnInit {
 
-  location: String = 'Munich';
-  distance: string = '10000'; // = { name: '10km', value: '10000', disabled: false };
+  location: string = 'Munich';
+  distance: number = 1; // = { name: '10km', value: '10000', disabled: false };
 
   public input1Moment: any;
   public input2Moment: any;
@@ -22,6 +22,7 @@ export class SalonsComponent implements OnInit {
 
 
   filterByLocation(arr){
+    console.log(this.distance);
     var origins: string = '';
     arr.map((item, index) => { origins+=item.address; origins+='|'; });
     // console.log(location);
@@ -39,8 +40,11 @@ export class SalonsComponent implements OnInit {
           }
 
           var arr1: any[] = [];
-          for (var i=0; i<arr.length; i++){
-            if (arr[i].distance <= this.distance) arr1.push(arr[i]);
+          for (let i = 0; i<arr.length; i++){
+            console.log(arr[i]);
+            if (arr[i].distance <= this.distance * 1000){
+              arr1.push(arr[i]);
+            }
           }
           this.salons = arr1;
         },

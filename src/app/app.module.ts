@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { HttpModule } from '@angular/http';
 
@@ -17,6 +17,7 @@ import {MaterialModule,
         MdSelectModule,
         MdIconModule,
         MdDatepickerModule,
+        MdNativeDateModule,
         MdGridListModule,
         MdIconRegistry} from '@angular/material';
 
@@ -30,9 +31,11 @@ import 'hammerjs';
 import { DatepickerModule } from 'angular2-material-datepicker';
 import { DateTimePickerModule } from 'ng-pick-datetime';
 import { SearchResultComponent } from './search-result/search-result.component';
+import { HomeComponent } from './home/home.component';
 
 const appRoutes: Routes = [
-  { path: 'salons', component: SalonsComponent },
+  {path: '', component: HomeComponent },
+  {path: 'salons', component: SalonsComponent },
 ];
 
 
@@ -41,7 +44,8 @@ const appRoutes: Routes = [
     AppComponent,
     HeaderComponent,
     SalonsComponent,
-    SearchResultComponent
+    SearchResultComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +56,8 @@ const appRoutes: Routes = [
     FlexLayoutModule,
     RouterModule.forRoot(appRoutes),
     DatepickerModule,
-    DateTimePickerModule
+    DateTimePickerModule,
+    MdNativeDateModule
   ],
   providers: [MdIconRegistry],
   bootstrap: [AppComponent]

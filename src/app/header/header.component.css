@@ -1,3 +1,6 @@
+a{
+  text-decoration: none;
+}
 .toolbar-spacer {
   flex: 1 1 auto;
 }
@@ -6,5 +9,11 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  margin-left: 25%;
+  margin-left: -7%;
+}
+.logo{
+  color:#aaaaaa;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
