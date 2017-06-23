@@ -24,15 +24,18 @@ export class SalonsComponent implements OnInit {
   filterByLocation(arr){
     var origins: string = '';
     arr.map((item, index) => { origins+=item.address; origins+='|'; });
-
+    // console.log(location);
     this.salonsService
       .getDistanceMatrix(origins.substring(0, origins.length-1), this.location)
       .subscribe(
         resp => {
           var addresses: string = resp.origin_addresses;
+          console.log(addresses);
           for (var i = 0; i < addresses.length; i++) {
-            var dist = resp.rows[i].elements[0].distance.value;
-            arr[i].distance = dist;
+            const distance = resp.rows[i].elements[0].distance;
+            if(distance){
+              arr[i].distance = distance.value;
+            }
           }
 
           var arr1: any[] = [];
