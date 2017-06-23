@@ -37,6 +37,7 @@ import { RegisterSalonComponent } from './register-salon/register-salon.componen
 const appRoutes: Routes = [
   {path: '', component: HomeComponent },
   {path: 'salons', component: SalonsComponent },
+  {path: 'register', component: RegisterSalonComponent },
 ];
 
 

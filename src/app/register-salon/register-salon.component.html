@@ -1,0 +1,144 @@
+<md-card>
+  <form>
+    General Information
+    <hr>
+    <div fxLayout="row">
+      <md-input-container fxFlexOffset="25" fxFlex="25">
+        <input mdInput placeholder="Salon Name" name="salon-name" >
+      </md-input-container>
+
+      <md-input-container fxFlexOffset="5" fxFlex="25">
+        <input mdInput placeholder="Address" name="address" >
+      </md-input-container>
+    </div>
+    <div fxLayout="row">
+      <md-input-container fxFlexOffset="25" fxFlex="25">
+        <input mdInput placeholder="Owner Name" name="salon-owner" >
+      </md-input-container>
+      <md-input-container fxFlexOffset="5" fxFlex="25">
+        <input mdInput type="number" placeholder="No of Employees" name="personnel" >
+      </md-input-container>
+    </div>
+    Services
+    <button md-icon-button (click)="addService()"><md-icon>add</md-icon></button>
+    <hr>
+    <div fxLayout="row" *ngFor="let service of services">
+      <md-input-container fxFlexOffset="25" fxFlex="25">
+        <input mdInput placeholder="Service Name" name="service-name" [(ngModel)]="service.name" >
+      </md-input-container>
+      <md-input-container fxFlexOffset="5" fxFlex="25">
+        <input mdInput type="number" placeholder="Price" name="price" [(ngModel)]="service.price" >
+      </md-input-container>
+      <button md-icon-button (click)="deleteService(service)"><md-icon>close</md-icon></button>
+    </div>
+
+    Working hours
+    <hr>
+    <div fxLayout="row">
+      <div fxLayout="column" fxFlexOffset="25" fxFlex="55" style="text-align: left">
+        <table style="width: 100%">
+          <tbody>
+            <tr>
+              <td>Mon</td>
+              <td>
+                <md-input-container>
+                  <input type="time" mdInput  placeholder="From">
+                </md-input-container>
+              </td>
+              <td>
+                <md-input-container>
+                  <input type="time" mdInput placeholder="To">
+                </md-input-container>
+              </td>
+            </tr>
+            <tr>
+              <td>Tue</td>
+              <td>
+                <md-input-container>
+                  <input type="time" mdInput  placeholder="From">
+                </md-input-container>
+              </td>
+              <td>
+                <md-input-container>
+                  <input type="time" mdInput placeholder="To">
+                </md-input-container>
+              </td>
+            </tr>
+            <tr>
+              <td>Wed</td>
+              <td>
+                <md-input-container>
+                  <input type="time" mdInput  placeholder="From">
+                </md-input-container>
+              </td>
+              <td>
+                <md-input-container>
+                  <input type="time" mdInput placeholder="To">
+                </md-input-container>
+              </td>
+            </tr>
+            <tr>
+              <td>Thu</td>
+              <td>
+                <md-input-container>
+                  <input type="time" mdInput  placeholder="From">
+                </md-input-container>
+              </td>
+              <td>
+                <md-input-container>
+                  <input type="time" mdInput placeholder="To">
+                </md-input-container>
+              </td>
+            </tr>
+            <tr>
+              <td>Fri</td>
+              <td>
+                <md-input-container>
+                  <input type="time" mdInput  placeholder="From">
+                </md-input-container>
+              </td>
+              <td>
+                <md-input-container>
+                  <input type="time" mdInput placeholder="To">
+                </md-input-container>
+              </td>
+            </tr>
+            <tr>
+              <td>Sat</td>
+              <td>
+                <md-input-container>
+                  <input type="time" mdInput  placeholder="From">
+                </md-input-container>
+              </td>
+              <td>
+                <md-input-container>
+                  <input type="time" mdInput placeholder="To">
+                </md-input-container>
+              </td>
+            </tr>
+            <tr>
+              <td>Sun</td>
+              <td>
+                <md-input-container>
+                  <input type="time" mdInput  placeholder="From">
+                </md-input-container>
+              </td>
+              <td>
+                <md-input-container>
+                  <input type="time" mdInput placeholder="To">
+                </md-input-container>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <hr>
+    <div fxLayout="row">
+      <div fxFlexOffset="70">
+        <button md-raised-button class="mat-accent" (click)="registerSalon()">Register</button>
+      </div>
+    </div>
+  </form>
+
+</md-card>
