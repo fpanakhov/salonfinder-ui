@@ -2,8 +2,10 @@ import {Http, Headers, RequestOptions, Response} from '@angular/http';
 import {Inject, Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import {Salon} from '../models/salon';
 
-let salons = [
+
+const salons = [
   {
     name: 'Dirty GrandPa', address: 'Goodstrasse 32, Munich',
     services: [
@@ -22,24 +24,26 @@ let salons = [
   }
 ];
 
-
 @Injectable()
-export class SalonsService {
+export class SalonService {
 
   constructor(private http: Http) {  }
 
-  getSalonsLocal(){
+  getSalonsLocal() {
     return new Promise(resolve => resolve(salons));
   }
 
-  getSalons(){
+  getSalons() {
     return this.http.get('http://localhost:3000/api/salons')
       .map(response => response.json());
+  }
+  register(salon: Salon) {
+    console.log(salon);
   }
 
 
   getDistanceMatrix(origin, destination){
-    var _url =
+    const _url =
       'http://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins='
       + origin + '&destinations=' + destination; // + '&key=AIzaSyD4o9Cnhn_r6_bmZaW8Gh9-YgWnT3tKS64';
 

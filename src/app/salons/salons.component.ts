@@ -1,11 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { SalonsService } from './salons.service';
+import {SalonService} from '../services/salon.service'
 
 @Component({
   selector: 'app-salons',
   templateUrl: './salons.component.html',
   styleUrls: ['./salons.component.css'],
-  providers: [SalonsService]
+  providers: [SalonService]
 })
 
 export class SalonsComponent implements OnInit {
@@ -18,7 +18,7 @@ export class SalonsComponent implements OnInit {
 
   private salons;
 
-  constructor(private salonsService: SalonsService) { }
+  constructor(private salonsService: SalonService) { }
   filterByLocation(arr){
     console.log(this.distance);
     var origins: string = '';
@@ -60,7 +60,7 @@ export class SalonsComponent implements OnInit {
     return true; //TODO
   }
 
-  getSalons(){
+  getSalons() {
     //return this.salonsService.getSalonsLocal().then(salons => {
     //  this.salons = salons;
     //});
