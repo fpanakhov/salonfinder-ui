@@ -34,21 +34,19 @@ export class SalonService {
   }
 
   getSalons() {
-    return this.http.get('http://localhost:3000/api/salons')
+    return this.http.get('/api/salons')
       .map(response => response.json());
   }
+  
   register(salon: Salon) {
-    this.http.post('http://localhost:3000/api/salons', salon)
+    this.http.post('/api/salons', salon)
       .map(response => response.json())
       .subscribe(data => salon = data, err => console.log(err), () => console.log('salon registered successfully'));
   }
 
 
   getDistanceMatrix(origin, destination){
-    const _url =
-      'http://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins='
-      + origin + '&destinations=' + destination; // + '&key=AIzaSyD4o9Cnhn_r6_bmZaW8Gh9-YgWnT3tKS64';
-
+	let _url = '/api/maps/?origins=' + origin + '&destinations=' + destination;	
     return this.http.get(_url).map(resp => resp.json());
   }
 
