@@ -1,16 +1,15 @@
 <md-card>
   <form>
-    User Information
-    <hr>
     <div fxLayout="row">
       <md-input-container fxFlexOffset="25" fxFlex="25">
-        <input mdInput type="email" placeholder="Email" name="email" [(ngModel)]="salon.email" required>
+        <input mdInput type="email" placeholder="Email" name="email" required>
       </md-input-container>
 
       <md-input-container fxFlexOffset="5" fxFlex="25">
-        <input mdInput type="password" placeholder="Password" name="password" [(ngModel)]="salon.password" required>
+        <input mdInput type="password" placeholder="Password" name="password" required>
       </md-input-container>
     </div>
+    <hr>
     <div fxLayout="row">
       <div fxFlexOffset="70">
         <button md-raised-button class="mat-accent" (click)="login()">Log In</button>
