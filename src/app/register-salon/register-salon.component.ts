@@ -12,7 +12,7 @@ import {Salon} from '../models/salon'
 })
 export class RegisterSalonComponent implements OnInit {
   salon: Salon;
-  constructor(private salonService:SalonService) {
+  constructor(private salonService: SalonService) {
     this.salon = new Salon();
   }
 

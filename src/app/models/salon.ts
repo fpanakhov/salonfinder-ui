@@ -2,12 +2,14 @@ import {MenuItem} from './menuitem';
 import {TimeSlot} from '../models/timeslot';
 
 export class Salon {
+  email: string;
+  password: string;
   name: string;
   address: string;
   owner: string;
   personnel: number;
   menu: MenuItem[];
-  schedule: any[];
+  schedule: TimeSlot[];
   constructor() {
     this.menu = [];
     this.schedule = [];

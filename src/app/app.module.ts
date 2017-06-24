@@ -33,6 +33,7 @@ import { DateTimePickerModule } from 'ng-pick-datetime';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterSalonComponent } from './register-salon/register-salon.component';
+import { LoginComponent } from './login/login.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent },
@@ -48,7 +49,8 @@ const appRoutes: Routes = [
     SalonsComponent,
     SearchResultComponent,
     HomeComponent,
-    RegisterSalonComponent
+    RegisterSalonComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

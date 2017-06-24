@@ -38,7 +38,9 @@ export class SalonService {
       .map(response => response.json());
   }
   register(salon: Salon) {
-    console.log(salon);
+    this.http.post('http://localhost:3000/api/salons', salon)
+      .map(response => response.json())
+      .subscribe(data => salon = data, err => console.log(err), () => console.log('salon registered successfully'));
   }
 
 

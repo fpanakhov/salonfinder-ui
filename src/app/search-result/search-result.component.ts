@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {MenuItem} from '../models/menuitem'
 
 @Component({
   selector: 'app-search-result',
@@ -6,35 +7,34 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./search-result.component.css']
 })
 export class SearchResultComponent implements OnInit {
-
   @Input()
-  name: string = '';
+  name: string;
   @Input()
-  address: string = '';
+  address: string;
   @Input()
-  distance: number = 0;
-  price: number = 0;
+  distance: number;
+  price: number;
   @Input()
-  timeslots: any;
+  schedule: any[];
   @Input()
-  services: any;
+  menu: MenuItem[];
   selectedTimeSlot:string;
 
   constructor() {
-    console.log(this.services);
+    console.log(this.menu);
   }
 
-  calculateEstimatedPrice(services){
+  calculateEstimatedPrice(menu){
     let estPrice = 0;
-    for(let i = 0 ; i < services.length;i++){
-      estPrice += services[i].price;
+    for(let i = 0 ; i < menu.length;i++) {
+      estPrice += menu[i].price;
     }
     return estPrice
   }
 
   ngOnInit() {
-    console.log(this.services);
-    this.price = this.calculateEstimatedPrice(this.services);
+    console.log(this.menu);
+    this.price = this.calculateEstimatedPrice(this.menu);
   }
 
 }

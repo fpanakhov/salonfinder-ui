@@ -1,14 +1,25 @@
 <md-card>
   <form>
-    General Information
+    User Information
     <hr>
     <div fxLayout="row">
       <md-input-container fxFlexOffset="25" fxFlex="25">
-        <input mdInput placeholder="Salon Name" name="salon-name" [(ngModel)]="salon.name">
+        <input mdInput type="email" placeholder="Email" name="email" [(ngModel)]="salon.email" required>
       </md-input-container>
 
       <md-input-container fxFlexOffset="5" fxFlex="25">
-        <input mdInput placeholder="Address" name="address" [(ngModel)]="salon.address">
+        <input mdInput type="password" placeholder="Password" name="password" [(ngModel)]="salon.password" required>
+      </md-input-container>
+    </div>
+    Salon Information
+    <hr>
+    <div fxLayout="row">
+      <md-input-container fxFlexOffset="25" fxFlex="25">
+        <input mdInput placeholder="Salon Name" name="salon-name" [(ngModel)]="salon.name" required>
+      </md-input-container>
+
+      <md-input-container fxFlexOffset="5" fxFlex="25">
+        <input mdInput placeholder="Address" name="address" [(ngModel)]="salon.address" required>
       </md-input-container>
     </div>
     <div fxLayout="row">
