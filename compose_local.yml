@@ -1,0 +1,18 @@
+version: '2'
+services:
+  backend:
+    build: ../salonfinder-server
+    ports:
+      - "3000:3000"
+    volumes:
+      - ../salonfinder-server:/code
+  frontend:
+    build: ./
+    ports:
+      - "4200:4200"
+    volumes:
+      - .:/code
+  database:
+    image: "mongo"
+    ports:
+      - "27017:27017"
