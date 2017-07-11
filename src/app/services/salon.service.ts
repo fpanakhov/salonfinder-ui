@@ -49,5 +49,11 @@ export class SalonService {
 	let _url = '/api/maps/?origins=' + origin + '&destinations=' + destination;	
     return this.http.get(_url).map(resp => resp.json());
   }
+  
+  
+  getBookings(date){
+	return this.http.get('/api/bookings/?date=' + date)
+				.map(resp => resp.json());
+  }
 
 }

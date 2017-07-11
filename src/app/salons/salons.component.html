@@ -17,17 +17,18 @@
     </div>
     <div fxLayout="row">
       <md-input-container fxFlexOffset="20" fxFlex="25">
-        <input mdInput [mdDatepicker]="picker" placeholder="Date">
+        <input mdInput [mdDatepicker]="picker" placeholder="Date" [(ngModel)]="dateOfBooking" 
+        name="dateOfBooking">
         <button mdSuffix [mdDatepickerToggle]="picker"></button>
       </md-input-container>
       <md-datepicker #picker></md-datepicker>
 
       <div fxFlexOffset="5" fxFlex="25" fxLayout="row" style="text-align: left">
         <md-input-container fxFlex="45">
-          <input mdInput type="time" placeholder="From">
+          <input mdInput type="time" placeholder="From" [(ngModel)]="from" name="from">
         </md-input-container>
         <md-input-container fxFlexOffset="10" fxFlex="45">
-          <input mdInput type="time" placeholder="To">
+          <input mdInput type="time" placeholder="To" [(ngModel)]="to" name="to">
         </md-input-container>
       </div>
     </div>

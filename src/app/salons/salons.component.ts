@@ -11,70 +11,57 @@ import {SalonService} from '../services/salon.service'
 export class SalonsComponent implements OnInit {
 
   location: string = 'Munich';
-  distance: number = 10; // = { name: '10km', value: '10000', disabled: false };
+  distance: number = 10;
+  dateOfBooking: Date = new Date();
 
-  public input1Moment: any;
-  public input2Moment: any;
+  from: any = '10:00:00';
+  to: any = '18:00:00';
 
   private salons;
 
   constructor(private salonsService: SalonService) { }
-  filterByLocation(arr){
-    console.log(this.distance);
+  
+  filterByLocation(salons, bookings){
     var origins: string = '';
-    arr.map((item, index) => { origins+=item.address; origins+='|'; });
-    // console.log(location);
+    salons.map((item, index) => { origins+=item.address; origins+='|'; });
+    
     this.salonsService
       .getDistanceMatrix(origins.substring(0, origins.length-1), this.location)
       .subscribe(
         resp => {
           var addresses: string = resp.origin_addresses;
-          console.log(addresses);
           for (var i = 0; i < addresses.length; i++) {
             const distance = resp.rows[i].elements[0].distance;
             if(distance){
-              arr[i].distance = distance.value;
+              salons[i].distance = distance.value;
             }
           }
 
           var arr1: any[] = [];
-          for (let i = 0; i<arr.length; i++){
-            console.log(arr[i]);
-            if (arr[i].distance <= this.distance * 1000){
-              arr1.push(arr[i]);
+          for (let i = 0; i<salons.length; i++){
+            if (salons[i].distance <= this.distance * 1000){
+              arr1.push(salons[i]);
             }
           }
+          
+          arr1.map(s => this.setBookings(s, bookings));          
           this.salons = arr1;
-          console.log(this.salons);
         },
         error => { this.location = error; },
         () => {} );
   }
-
-
-  dateMatches(salon){
-    return true; // TODO
+  
+  setBookings(salon, bookings){
+      // TODO: salon.bookings = dictionary[timeslot, numberofbookings];
   }
 
-  fromtoMatches(salon){
-    return true; //TODO
-  }
-
-  getSalons() {
-    //return this.salonsService.getSalonsLocal().then(salons => {
-    //  this.salons = salons;
-    //});
-
+  getSalons(bookings) {
     this.salonsService.getSalons()
       .subscribe(
         salons => {
-          var arr: any[] = [];
-          salons
-            .filter(s => this.dateMatches(s))
-            .filter(s => this.fromtoMatches(s))
-            .map(s => arr.push(s));
-
-          this.filterByLocation(arr);
+          let arr: any[] = [];
+          salons.map(s => arr.push(s));
+          this.filterByLocation(arr, bookings);
         },
         error => console.error('Error: ' + error),
         () => console.log('Completed!')
@@ -82,10 +69,47 @@ export class SalonsComponent implements OnInit {
   }
 
   search(){
-    this.getSalons();
+    this.salonsService.getBookings(this.dateOfBooking)
+        .subscribe(
+            bookings => {
+                this.getSalons(bookings);
+            }
+        );
   }
-
+                                                                                                                                                                                            
   ngOnInit() {
-    this.getSalons();
+    this.search();
+  }
+  
+  
+  
+  hasSlotsAvailable(salon, bookings){
+    let result: any[] = [];
+    const slotSize = 1;
+    let day: number = this.dateOfBooking.getDay();
+    let ds: any = null;
+    switch(day){
+        case 1: { ds = salon.schedule.mon; break; }
+        case 2: { ds = salon.schedule.tue; break; }
+        case 3: { ds = salon.schedule.wed; break; }
+        case 4: { ds = salon.schedule.thu; break; }
+        case 5: { ds = salon.schedule.fri; break; }
+        case 6: { ds = salon.schedule.sat; break; }
+        case 0: { ds = salon.schedule.sun; break; }
+    }
+    
+    let from = ds.from;
+    let to = ds.to;
+    let maxBookings = salon.personnel;
+    
+    while (from < to){
+        // TODO: check if bookingCount for the slot < maxBookings
+        // 
+        result.push(from);
+        from += slotSize;
+    }
+    
+    return result;    
   }
 }
+
