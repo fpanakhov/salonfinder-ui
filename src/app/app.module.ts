@@ -34,10 +34,12 @@ import { SearchResultComponent } from './search-result/search-result.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterSalonComponent } from './register-salon/register-salon.component';
 import { LoginComponent } from './login/login.component';
+import { EditSalonComponent } from './edit-salon/edit-salon.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent },
   {path: 'salons', component: SalonsComponent },
+  {path: 'salons/:id/edit', component: EditSalonComponent},
   {path: 'register', component: RegisterSalonComponent },
   {path: 'login', component: LoginComponent }
 ];
@@ -51,6 +53,7 @@ const appRoutes: Routes = [
     SearchResultComponent,
     HomeComponent,
     RegisterSalonComponent,
+    EditSalonComponent,
     LoginComponent
   ],
   imports: [

@@ -1,0 +1,144 @@
+<md-card>
+  <form>
+    Salon Information
+    <hr>
+    <div fxLayout="row">
+      <md-input-container fxFlexOffset="25" fxFlex="25">
+        <input mdInput placeholder="Salon Name" name="salon-name" [(ngModel)]="salon.name" required>
+      </md-input-container>
+
+      <md-input-container fxFlexOffset="5" fxFlex="25">
+        <input mdInput placeholder="Address" name="address" [(ngModel)]="salon.address" required>
+      </md-input-container>
+    </div>
+    <div fxLayout="row">
+      <md-input-container fxFlexOffset="25" fxFlex="25">
+        <input mdInput placeholder="Owner Name" name="salon-owner" [(ngModel)]="salon.owner">
+      </md-input-container>
+      <md-input-container fxFlexOffset="5" fxFlex="25">
+        <input mdInput type="number" placeholder="No of Employees" name="personnel" [(ngModel)]="salon.personnel">
+      </md-input-container>
+    </div>
+    Services
+    <button md-icon-button (click)="addMenuItem()"><md-icon>add</md-icon></button>
+    <hr>
+    <div fxLayout="row" *ngFor="let menuItem of salon.menu">
+      <md-input-container fxFlexOffset="25" fxFlex="25">
+        <input mdInput placeholder="Service Name" name="service-name" [(ngModel)]="menuItem.name" >
+      </md-input-container>
+      <md-input-container fxFlexOffset="5" fxFlex="25">
+        <input mdInput type="number" placeholder="Price" name="price" [(ngModel)]="menuItem.price" >
+      </md-input-container>
+      <button md-icon-button (click)="deleteMenuItem(menuItem)"><md-icon>close</md-icon></button>
+    </div>
+
+    Working hours
+    <hr>
+    <div fxLayout="row">
+      <div fxLayout="column" fxFlexOffset="25" fxFlex="55" style="text-align: left">
+        <table style="width: 100%">
+          <tbody>
+          <tr>
+            <td>Mon</td>
+            <td>
+              <md-input-container>
+                <input type="time" mdInput  placeholder="From" name="monFrom" [(ngModel)]="salon.schedule['mon'].from">
+              </md-input-container>
+            </td>
+            <td>
+              <md-input-container>
+                <input type="time" mdInput placeholder="To" name="monTo" [(ngModel)]="salon.schedule['mon'].to">
+              </md-input-container>
+            </td>
+          </tr>
+          <tr>
+            <td>Tue</td>
+            <td>
+              <md-input-container>
+                <input type="time" mdInput  placeholder="From" name="tueFrom" [(ngModel)]="salon.schedule['tue'].from">
+              </md-input-container>
+            </td>
+            <td>
+              <md-input-container>
+                <input type="time" mdInput placeholder="To" name="tueTo" [(ngModel)]="salon.schedule['tue'].to">
+              </md-input-container>
+            </td>
+          </tr>
+          <tr>
+            <td>Wed</td>
+            <td>
+              <md-input-container>
+                <input type="time" mdInput  placeholder="From" name="wedFrom" [(ngModel)]="salon.schedule['wed'].from">
+              </md-input-container>
+            </td>
+            <td>
+              <md-input-container>
+                <input type="time" mdInput placeholder="To" name="wedTo" [(ngModel)]="salon.schedule['wed'].to">
+              </md-input-container>
+            </td>
+          </tr>
+          <tr>
+            <td>Thu</td>
+            <td>
+              <md-input-container>
+                <input type="time" mdInput  placeholder="From" name="thuFrom" [(ngModel)]="salon.schedule['thu'].from">
+              </md-input-container>
+            </td>
+            <td>
+              <md-input-container>
+                <input type="time" mdInput placeholder="To" name="thuTo" [(ngModel)]="salon.schedule['thu'].to">
+              </md-input-container>
+            </td>
+          </tr>
+          <tr>
+            <td>Fri</td>
+            <td>
+              <md-input-container>
+                <input type="time" mdInput  placeholder="From" name="friFrom" [(ngModel)]="salon.schedule['fri'].from">
+              </md-input-container>
+            </td>
+            <td>
+              <md-input-container>
+                <input type="time" mdInput placeholder="To" name="friTo" [(ngModel)]="salon.schedule['fri'].to">
+              </md-input-container>
+            </td>
+          </tr>
+          <tr>
+            <td>Sat</td>
+            <td>
+              <md-input-container>
+                <input type="time" mdInput  placeholder="From" name="satFrom" [(ngModel)]="salon.schedule['sat'].from">
+              </md-input-container>
+            </td>
+            <td>
+              <md-input-container>
+                <input type="time" mdInput placeholder="To" name="satTo" [(ngModel)]="salon.schedule['sat'].to">
+              </md-input-container>
+            </td>
+          </tr>
+          <tr>
+            <td>Sun</td>
+            <td>
+              <md-input-container>
+                <input type="time" mdInput  placeholder="From"  name="sunFrom" [(ngModel)]="salon.schedule['sun'].from">
+              </md-input-container>
+            </td>
+            <td>
+              <md-input-container>
+                <input type="time" mdInput placeholder="To" name="sunTo" [(ngModel)]="salon.schedule['sun'].to">
+              </md-input-container>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <hr>
+    <div fxLayout="row">
+      <div fxFlexOffset="70">
+        <button md-raised-button class="mat-accent" (click)="registerSalon()">Save</button>
+      </div>
+    </div>
+  </form>
+
+</md-card>

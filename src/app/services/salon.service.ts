@@ -37,7 +37,7 @@ export class SalonService {
     return this.http.get('/api/salons')
       .map(response => response.json());
   }
-  
+
   register(salon: Salon) {
     this.http.post('/api/salons', salon)
       .map(response => response.json())
@@ -46,14 +46,24 @@ export class SalonService {
 
 
   getDistanceMatrix(origin, destination){
-	let _url = '/api/maps/?origins=' + origin + '&destinations=' + destination;	
+	let _url = '/api/maps/?origins=' + origin + '&destinations=' + destination;
     return this.http.get(_url).map(resp => resp.json());
   }
-  
-  
+
+
   getBookings(date){
 	return this.http.get('/api/bookings/?date=' + date)
 				.map(resp => resp.json());
   }
 
+  update(salon: Salon) {
+    this.http.put('api/salons/' + salon.id, salon)
+      .map(response => response.json())
+      .subscribe(data => salon = data, err => console.log(err), () => console.log('salon saved successfully'));
+  }
+
+  getSalon(id: number) {
+    return this.http.get('/api/salons/' + id)
+      .map(response => response.json())
+  }
 }

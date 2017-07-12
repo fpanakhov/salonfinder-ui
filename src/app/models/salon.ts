@@ -10,6 +10,7 @@ export class Salon {
   personnel: number;
   menu: MenuItem[];
   schedule: TimeSlot[];
+  id: number;
   constructor() {
     this.menu = [];
     this.schedule = [];
