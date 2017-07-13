@@ -13,13 +13,14 @@ export class SearchResultComponent implements OnInit {
   address: string;
   @Input()
   distance: number;
-  price: number;
   @Input()
   schedule: any[];
   @Input()
   menu: MenuItem[];  
   @Input()
   timeslots: any[];
+  @Input()
+  totalPriceForSelectedServices: number;
   
   selectedTimeSlot:string;
 
@@ -31,17 +32,8 @@ export class SearchResultComponent implements OnInit {
 	return this.timeslots.filter((item, index) => index < 3 );
   }
 
-  calculateEstimatedPrice(menu){
-    let estPrice = 0;
-    for(let i = 0 ; i < menu.length;i++) {
-      estPrice += menu[i].price;
-    }
-    return estPrice
-  }
-
   ngOnInit() {
     console.log(this.menu);
-    this.price = this.calculateEstimatedPrice(this.menu);
   }
 
 }

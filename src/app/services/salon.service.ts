@@ -56,6 +56,32 @@ export class SalonService {
 				.map(resp => resp.json());
   }
   
+  
+  // calculates and the total price for selected services for the salon
+  // returns false if the salon does not offer one of the selected services
+  checkServicesOffered(salon, services){
+	let total: number = 0.0;
+	for (let required of services){
+		let found = false;
+		for (let offered of salon.menu){
+			if (required == offered.name){
+				total += offered.price;
+				found = true;
+				break;
+			}
+		}
+		
+		if (false == found){
+			return false;
+		}
+	}
+	
+	salon.totalPriceForSelectedServices = total;
+	return true;
+  }
+  
+  // generates and sets timeslots for the salon
+  // returns false if no slots available for the given date and timerange
   generateSalonTimeslots(salon, date, from, to){
     let slots: string[] = [];
     salon.timeslots = slots;

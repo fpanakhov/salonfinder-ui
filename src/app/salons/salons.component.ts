@@ -16,10 +16,23 @@ export class SalonsComponent implements OnInit {
 
   from: any = '10:00:00';
   to: any = '18:00:00';
+  
+  checked: any[] = [false, false, false, false, false, false, false, false, false, false, false, false];
+  services: any[] = ['haircut', 'nails', 'styling', 'pedicure', 'massage', 'beardcut', 'shaving',
+                    "women's cut", 'sauna', 'beard coloring', 'manicure', 'irokez'];
 
   private salons;
 
   constructor(private salonsService: SalonService) { }
+  
+  get selectedServices(){
+    let selected: any[] = [];
+    for(let i=0; i<this.checked.length; ++i){
+        if (this.checked[i])
+            selected.push(this.services[i]);
+    }
+    return selected;
+  }
   
   filterByLocation(salons){
     var origins: string = '';
@@ -38,12 +51,15 @@ export class SalonsComponent implements OnInit {
           }
 
           var arr1: any[] = [];
-          for (let i = 0; i<salons.length; i++){
-            if (salons[i].distance <= this.distance * 1000){
+          for (let salon of salons){
+            if (salon.distance <= this.distance * 1000){
+              if (false == this.salonsService.checkServicesOffered(salon, this.selectedServices))
+                    continue;
+            
               if (this.salonsService
                         .generateSalonTimeslots(
-                            salons[i], this.dateOfBooking, this.from, this.to)){ 
-                arr1.push(salons[i]);
+                            salon, this.dateOfBooking, this.from, this.to)){ 
+                arr1.push(salon);
               }
             }
           }
@@ -53,8 +69,6 @@ export class SalonsComponent implements OnInit {
         error => { this.location = error; },
         () => {} );
   }
-  
-
   
   getSalons() {
     this.salonsService.getSalons()

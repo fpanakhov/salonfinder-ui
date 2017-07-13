@@ -40,22 +40,22 @@
     <hr>
 
     <div fxLayout="row" fxFlexOffset="20" style="text-align: left">
-      <md-checkbox fxFlex="20" name="serv" value="1">haircut</md-checkbox>
-      <md-checkbox fxFlex="20" name="serv" value="4">nails</md-checkbox>
-      <md-checkbox fxFlex="20" name="serv" value="7">styling</md-checkbox>
-      <md-checkbox fxFlex="20" name="serv" value="10">pedicure</md-checkbox>
+      <md-checkbox fxFlex="20" name="serv" [(ngModel)]="checked[0]" >{{services[0]}}</md-checkbox>
+      <md-checkbox fxFlex="20" name="serv" [(ngModel)]="checked[1]">{{services[1]}}</md-checkbox>
+      <md-checkbox fxFlex="20" name="serv" [(ngModel)]="checked[2]">{{services[2]}}</md-checkbox>
+      <md-checkbox fxFlex="20" name="serv" [(ngModel)]="checked[3]">{{services[3]}}</md-checkbox>
     </div>
     <div fxLayout="row" fxFlexOffset="20" style="text-align: left">
-      <md-checkbox fxFlex="20" name="serv" value="2">massage</md-checkbox>
-      <md-checkbox fxFlex="20" name="serv" value="5">beardcut</md-checkbox>
-      <md-checkbox fxFlex="20" name="serv" value="8">shaving</md-checkbox>
-      <md-checkbox fxFlex="20" name="serv" value="11">women's cut</md-checkbox>
+      <md-checkbox fxFlex="20" name="serv" [(ngModel)]="checked[4]">{{services[4]}}</md-checkbox>
+      <md-checkbox fxFlex="20" name="serv" [(ngModel)]="checked[5]">{{services[5]}}</md-checkbox>
+      <md-checkbox fxFlex="20" name="serv" [(ngModel)]="checked[6]">{{services[6]}}</md-checkbox>
+      <md-checkbox fxFlex="20" name="serv" [(ngModel)]="checked[7]">{{services[7]}}</md-checkbox>
     </div>
     <div fxLayout="row" fxFlexOffset="20" style="text-align: left">
-      <md-checkbox fxFlex="20" name="serv" value="3">sauna</md-checkbox>
-      <md-checkbox fxFlex="20" name="serv" value="6">beard coloring</md-checkbox>
-      <md-checkbox fxFlex="20" name="serv" value="9">manicure</md-checkbox>
-      <md-checkbox fxFlex="20" name="serv" value="12">irokez</md-checkbox>
+      <md-checkbox fxFlex="20" name="serv" [(ngModel)]="checked[8]">{{services[8]}}</md-checkbox>
+      <md-checkbox fxFlex="20" name="serv" [(ngModel)]="checked[9]">{{services[9]}}</md-checkbox>
+      <md-checkbox fxFlex="20" name="serv" [(ngModel)]="checked[10]">{{services[10]}}</md-checkbox>
+      <md-checkbox fxFlex="20" name="serv" [(ngModel)]="checked[11]">{{services[11]}}</md-checkbox>
     </div>
   </md-card>
 </form>
@@ -65,5 +65,6 @@
                    [menu]="salon.menu"
                    [timeslots]="salon.timeslots"
                    [distance]="salon.distance"
+                   [totalPriceForSelectedServices]="salon.totalPriceForSelectedServices"
                    [schedule]="salon.schedule"></app-search-result>
 
