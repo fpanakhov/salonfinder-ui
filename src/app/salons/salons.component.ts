@@ -40,7 +40,9 @@ export class SalonsComponent implements OnInit {
           var arr1: any[] = [];
           for (let i = 0; i<salons.length; i++){
             if (salons[i].distance <= this.distance * 1000){
-              if (this.generateSalonTimeslots(salons[i], this.from, this.to)){ 
+              if (this.salonsService
+                        .generateSalonTimeslots(
+                            salons[i], this.dateOfBooking, this.from, this.to)){ 
                 arr1.push(salons[i]);
               }
             }
@@ -52,39 +54,7 @@ export class SalonsComponent implements OnInit {
         () => {} );
   }
   
-  generateSalonTimeslots(salon, from, to){
-    let slots: string[] = [];
-    salon.timeslots = slots;
-    
-    if (from >= to) return false;
-    
-    const slotSize = 1;
-    let day: any;
-    switch(this.dateOfBooking.getDay()){
-        case 1: { day = salon.schedule.mon; break; }
-        case 2: { day = salon.schedule.tue; break; }
-        case 3: { day = salon.schedule.wed; break; }
-        case 4: { day = salon.schedule.thu; break; }
-        case 5: { day = salon.schedule.fri; break; }
-        case 6: { day = salon.schedule.sat; break; }
-        case 0: { day = salon.schedule.sun; break; }
-    }    
-    
-    let result = false;
-    if (day != 'undefined' && day != null){
-    
-        for (let f = day.from; f < day.to; f += slotSize){
-            let fstr = f.toString() + ':00:00';
-            if (fstr.length == 7) fstr = '0' + fstr;
-            if (fstr >= from && fstr < to){
-                slots.push(fstr);
-            }
-            result = true;
-        }
-    }
-    salon.timeslots = slots;
-    return (salon.timeslots.length > 0);
-  }
+
   
   getSalons() {
     this.salonsService.getSalons()

@@ -55,5 +55,36 @@ export class SalonService {
 	return this.http.get('/api/bookings/?date=' + date)
 				.map(resp => resp.json());
   }
+  
+  generateSalonTimeslots(salon, date, from, to){
+    let slots: string[] = [];
+    salon.timeslots = slots;
+    
+    if (from >= to) return false;
+    
+    const slotSize = 1;
+    let day: any;
+    switch(date.getDay()){
+        case 1: { day = salon.schedule.mon; break; }
+        case 2: { day = salon.schedule.tue; break; }
+        case 3: { day = salon.schedule.wed; break; }
+        case 4: { day = salon.schedule.thu; break; }
+        case 5: { day = salon.schedule.fri; break; }
+        case 6: { day = salon.schedule.sat; break; }
+        case 0: { day = salon.schedule.sun; break; }
+    }    
+    
+    if (day != 'undefined' && day != null){    
+        for (let f = day.from; f < day.to; f += slotSize){
+            let fstr = f.toString() + ':00:00';
+            if (fstr.length == 7) fstr = '0' + fstr;
+            if (fstr >= from && fstr < to){
+                slots.push(fstr);
+            }
+        }
+    }
+    salon.timeslots = slots;
+    return (salon.timeslots.length > 0);
+  }
 
 }
