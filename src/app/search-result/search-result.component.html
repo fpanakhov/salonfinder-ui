@@ -16,13 +16,17 @@
 
     <div fxFlex="50" fxLayout="row">
       <div fxFlex="70">
-          <md-radio-group class="example-radio-group" [(ngModel)]="selectedTimeSlot">
-			  <li>
-            <md-radio-button class="example-radio-button" *ngFor="let slot of timeslots" [value]="slot">
-              {{slot}}
+          <!--md-radio-group class="example-radio-group" [(ngModel)]="selectedTimeSlot">
+            <md-radio-button class="example-radio-button" *ngFor="let slot of topThreeTimeslots" [value]="slot">
+              <div>{{slot}}</div>
             </md-radio-button>
-            </li>
-          </md-radio-group>
+          </md-radio-group-->
+          <ul>
+           <li *ngFor="let slot of topThreeTimeslots" >
+             {{slot}}
+           </li>
+           <li>... see more</li>
+          </ul>
       </div>
       <div fxFlex="30">
           <button md-raised-button class="mat-primary" style="margin-top: 25%; height: 40px; width:150px;">Book</button>

@@ -26,6 +26,10 @@ export class SearchResultComponent implements OnInit {
   constructor() {
     console.log(this.menu);
   }
+  
+  public get topThreeTimeslots() {
+	return this.timeslots.filter((item, index) => index < 3 );
+  }
 
   calculateEstimatedPrice(menu){
     let estPrice = 0;
