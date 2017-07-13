@@ -17,7 +17,10 @@ export class SearchResultComponent implements OnInit {
   @Input()
   schedule: any[];
   @Input()
-  menu: MenuItem[];
+  menu: MenuItem[];  
+  @Input()
+  timeslots: any[];
+  
   selectedTimeSlot:string;
 
   constructor() {

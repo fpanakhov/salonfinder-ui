@@ -21,7 +21,7 @@ export class SalonsComponent implements OnInit {
 
   constructor(private salonsService: SalonService) { }
   
-  filterByLocation(salons, bookings){
+  filterByLocation(salons){
     var origins: string = '';
     salons.map((item, index) => { origins+=item.address; origins+='|'; });
     
@@ -40,28 +40,59 @@ export class SalonsComponent implements OnInit {
           var arr1: any[] = [];
           for (let i = 0; i<salons.length; i++){
             if (salons[i].distance <= this.distance * 1000){
-              arr1.push(salons[i]);
+              if (this.generateSalonTimeslots(salons[i], this.from, this.to)){ 
+                arr1.push(salons[i]);
+              }
             }
           }
-          
-          arr1.map(s => this.setBookings(s, bookings));          
+                   
           this.salons = arr1;
         },
         error => { this.location = error; },
         () => {} );
   }
   
-  setBookings(salon, bookings){
-      // TODO: salon.bookings = dictionary[timeslot, numberofbookings];
+  generateSalonTimeslots(salon, from, to){
+    let slots: string[] = [];
+    salon.timeslots = slots;
+    
+    if (from >= to) return false;
+    
+    const slotSize = 1;
+    let day: any;
+    switch(this.dateOfBooking.getDay()){
+        case 1: { day = salon.schedule.mon; break; }
+        case 2: { day = salon.schedule.tue; break; }
+        case 3: { day = salon.schedule.wed; break; }
+        case 4: { day = salon.schedule.thu; break; }
+        case 5: { day = salon.schedule.fri; break; }
+        case 6: { day = salon.schedule.sat; break; }
+        case 0: { day = salon.schedule.sun; break; }
+    }    
+    
+    let result = false;
+    if (day != 'undefined' && day != null){
+    
+        for (let f = day.from; f < day.to; f += slotSize){
+            let fstr = f.toString() + ':00:00';
+            if (fstr.length == 7) fstr = '0' + fstr;
+            if (fstr >= from && fstr < to){
+                slots.push(fstr);
+            }
+            result = true;
+        }
+    }
+    salon.timeslots = slots;
+    return (salon.timeslots.length > 0);
   }
-
-  getSalons(bookings) {
+  
+  getSalons() {
     this.salonsService.getSalons()
       .subscribe(
         salons => {
           let arr: any[] = [];
           salons.map(s => arr.push(s));
-          this.filterByLocation(arr, bookings);
+          this.filterByLocation(arr);
         },
         error => console.error('Error: ' + error),
         () => console.log('Completed!')
@@ -69,47 +100,12 @@ export class SalonsComponent implements OnInit {
   }
 
   search(){
-    this.salonsService.getBookings(this.dateOfBooking)
-        .subscribe(
-            bookings => {
-                this.getSalons(bookings);
-            }
-        );
+    this.getSalons();
   }
-                                                                                                                                                                                            
+                                                                                                                                                                                           
   ngOnInit() {
     this.search();
   }
-  
-  
-  
-  hasSlotsAvailable(salon, bookings){
-    let result: any[] = [];
-    const slotSize = 1;
-    let day: number = this.dateOfBooking.getDay();
-    let ds: any = null;
-    switch(day){
-        case 1: { ds = salon.schedule.mon; break; }
-        case 2: { ds = salon.schedule.tue; break; }
-        case 3: { ds = salon.schedule.wed; break; }
-        case 4: { ds = salon.schedule.thu; break; }
-        case 5: { ds = salon.schedule.fri; break; }
-        case 6: { ds = salon.schedule.sat; break; }
-        case 0: { ds = salon.schedule.sun; break; }
-    }
-    
-    let from = ds.from;
-    let to = ds.to;
-    let maxBookings = salon.personnel;
-    
-    while (from < to){
-        // TODO: check if bookingCount for the slot < maxBookings
-        // 
-        result.push(from);
-        from += slotSize;
-    }
-    
-    return result;    
-  }
+
 }
 
