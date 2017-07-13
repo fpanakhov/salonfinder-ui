@@ -66,6 +66,7 @@ export class SalonService {
 		for (let offered of salon.menu){
 			if (required == offered.name){
 				total += offered.price;
+				offered.selected = true;
 				found = true;
 				break;
 			}

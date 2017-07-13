@@ -9,13 +9,14 @@
       </div>
       <div>
         <md-chip-list>
-          <md-chip *ngFor="let menuItem of menu">{{menuItem.name}}</md-chip>
+          <md-chip *ngFor="let menuItem of menu" [selected]="menuItem.selected == true ? true : false">{{menuItem.name}}</md-chip>
         </md-chip-list>
       </div>
     </div>
 
     <div fxFlex="50" fxLayout="row">
       <div fxFlex="70">
+		  Time slots available:
           <!--md-radio-group class="example-radio-group" [(ngModel)]="selectedTimeSlot">
             <md-radio-button class="example-radio-button" *ngFor="let slot of topThreeTimeslots" [value]="slot">
               <div>{{slot}}</div>
