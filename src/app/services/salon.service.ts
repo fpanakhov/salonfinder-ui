@@ -38,6 +38,11 @@ export class SalonService {
       .map(response => response.json());
   }
   
+  getSalon(salon_id){
+    return this.http.get('/api/salons/' + salon_id)
+      .map(response => response.json());
+  }
+  
   register(salon: Salon) {
     this.http.post('/api/salons', salon)
       .map(response => response.json())
