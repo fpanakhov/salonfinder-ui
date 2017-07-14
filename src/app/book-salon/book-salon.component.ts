@@ -12,12 +12,12 @@ import {SalonService} from '../services/salon.service'
 
 export class BookSalonComponent implements OnInit {
 
-  salon: any;
-  date: string;
-  bookings: any[];
+  salon: any = {name:"", timeslots: [], address:"", menu: []};
+  date: string = "";
+  bookings: any[] = [];
   selectedTimeSlot: string = '14:00:00';
-  email: string;
-  selectedServices: string[] = ['haircut', 'irokez'];
+  email: string = "";
+  selectedServices = ['haircut', 'irokez'];
 
   constructor(
 		private activatedRoute: ActivatedRoute
@@ -25,7 +25,7 @@ export class BookSalonComponent implements OnInit {
   }
   
   book(){
-  
+	// TODO
   }
   
   getSalon(salon_id, date){
@@ -61,6 +61,14 @@ export class BookSalonComponent implements OnInit {
 			this.getSalon(salon_id, this.date);
 		});
      });
+  }
+  
+  recalc_price() {
+    let total = 0.0;
+    for (let m of this.salon.menu){
+		total += ( m.selected ? m.price : 0 );
+    }
+    this.salon.totalPriceForSelectedServices = total;
   }
 
 }

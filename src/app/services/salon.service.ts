@@ -75,6 +75,8 @@ export class SalonService {
   checkServicesOffered(salon, services){
 	let total: number = 0.0;
 	let found = 0;
+	
+	salon.menu.map(item => { item.selected = false; } );
 	for (let required of services){
 		for (let offered of salon.menu){
 			if (required == offered.name){
