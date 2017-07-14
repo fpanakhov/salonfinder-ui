@@ -1,3 +1,4 @@
+import {Router, ActivatedRoute, Params} from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import {SalonService} from '../services/salon.service'
 
@@ -12,14 +13,39 @@ import {SalonService} from '../services/salon.service'
 export class BookSalonComponent implements OnInit {
 
   salon: any;
+  date: string;
+  bookings: any[];
+  selectedTimeSlot: string = '14:00:00';
+  email: string;
+  selectedServices: string[] = ['haircut', 'irokez'];
 
-  constructor(private salonsService: SalonService) { }
+  constructor(
+		private activatedRoute: ActivatedRoute
+		, private salonsService: SalonService) {
+  }
   
-  getSalon(){
-	this.salonsService.getSalon("5943b69e825d4809f37e8d61")
+  book(){
+  
+  }
+  
+  getSalon(salon_id, date){
+	this.salonsService.getSalon(salon_id)
       .subscribe(
         s => {
+			this.salonsService.generateSalonTimeslots(s, new Date(date), '00:00:00', '23:59:00');
+			this.salonsService.checkServicesOffered(s, this.selectedServices);
 			this.salon = s;
+        },
+        error => console.error('Error: ' + error),
+        () => console.log('Completed!')
+      );
+  }
+  
+  getSalonBookings(salon_id, date){
+	this.salonsService.getSalonBookings(salon_id, date, true)
+      .subscribe(
+        b => {
+			this.bookings = b;
         },
         error => console.error('Error: ' + error),
         () => console.log('Completed!')
@@ -27,7 +53,14 @@ export class BookSalonComponent implements OnInit {
   }
 
   ngOnInit() {
-	this.getSalon();
+	this.activatedRoute.params.subscribe((params: Params) => {
+        let salon_id = params['salon_id'];
+        this.activatedRoute.queryParams.subscribe((params: Params) => {
+			this.date = params['date'];
+			this.getSalonBookings(salon_id, this.date);
+			this.getSalon(salon_id, this.date);
+		});
+     });
   }
 
 }

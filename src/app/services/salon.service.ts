@@ -61,29 +61,33 @@ export class SalonService {
 				.map(resp => resp.json());
   }
   
+  getSalonBookings(salon_id, date, count=false){
+	let url = '/api/bookings/?salon_id=' + salon_id + '&date=' + date
+			+ (count == true ? '&count=yes' : '');
+	console.log(url);
+	return this.http.get(url)
+				.map(resp => resp.json());
+  }
+  
   
   // calculates and the total price for selected services for the salon
   // returns false if the salon does not offer one of the selected services
   checkServicesOffered(salon, services){
 	let total: number = 0.0;
+	let found = 0;
 	for (let required of services){
-		let found = false;
 		for (let offered of salon.menu){
 			if (required == offered.name){
 				total += offered.price;
 				offered.selected = true;
-				found = true;
+				found += 1;
 				break;
 			}
-		}
-		
-		if (false == found){
-			return false;
 		}
 	}
 	
 	salon.totalPriceForSelectedServices = total;
-	return true;
+	return (found == services.length);
   }
   
   // generates and sets timeslots for the salon

@@ -1,4 +1,33 @@
-<p>
-  book-salon works!
-  {{salon.name}}
-</p>
+
+<h1>Salon Booking</h1>
+
+<form name="bookForm">
+<h2>{{salon.name}}</h2>
+<h3> {{salon.address}}</h3>
+<h5>Estimated Price : {{totalPriceForSelectedServices}}</h5>
+
+<h4>Bookings already done on {{date}}:</h4>
+ <ul>
+  <li *ngFor="let booking of bookings" >
+	{{booking.count}} for slot {{booking._id.slot + ':00:00'}} 
+  </li>
+ </ul>
+ 
+ <h4>Available slots for {{date}}:</h4>
+ <md-radio-group [(ngModel)]="selectedTimeSlot">
+  <md-list>
+   <md-list-item *ngFor="let slot of salon.timeslots">
+   <md-radio-button [value]="slot">
+     {{slot}}
+   </md-radio-button>
+  </md-list-item>
+  </md-list>   
+</md-radio-group>
+
+<md-input-container fxFlexOffset="10" fxFlex="45">
+  <input mdInput type="email" placeholder="email@domain" [(ngModel)]="email">
+</md-input-container>
+
+<button md-raised-button class="mat-accent" (click)="book()">BOOK</button>
+
+</form>
