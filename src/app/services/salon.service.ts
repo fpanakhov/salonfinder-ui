@@ -53,6 +53,15 @@ export class SalonService {
 	return this.http.post('/api/bookings', booking).map(resp => resp.json());
   }
 
+  getBooking(booking_id){
+    return this.http.get('/api/bookings/' + booking_id)
+      .map(response => response.json());
+  }
+  
+  putBooking(booking_id, booking){
+	return this.http.put('/api/bookings/' + booking_id, booking)
+		.map(resp => resp.json());
+  }
 
   getDistanceMatrix(origin, destination){
 	let _url = '/api/maps/?origins=' + origin + '&destinations=' + destination;	

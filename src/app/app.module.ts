@@ -35,13 +35,15 @@ import { HomeComponent } from './home/home.component';
 import { RegisterSalonComponent } from './register-salon/register-salon.component';
 import { LoginComponent } from './login/login.component';
 import { BookSalonComponent } from './book-salon/book-salon.component';
+import { ConfirmBookingComponent } from './confirm-booking/confirm-booking.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent },
   {path: 'salons', component: SalonsComponent },
   {path: 'register', component: RegisterSalonComponent },
   {path: 'login', component: LoginComponent },
-  {path: 'salons/:salon_id/book', component: BookSalonComponent}
+  {path: 'salons/:salon_id/book', component: BookSalonComponent},
+  {path: 'bookings/:booking_id/confirm', component: ConfirmBookingComponent }
 ];
 
 
@@ -54,7 +56,8 @@ const appRoutes: Routes = [
     HomeComponent,
     RegisterSalonComponent,
     LoginComponent,
-    BookSalonComponent
+    BookSalonComponent,
+    ConfirmBookingComponent
   ],
   imports: [
     BrowserModule,
