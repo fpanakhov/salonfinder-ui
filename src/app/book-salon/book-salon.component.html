@@ -4,35 +4,37 @@
 <form name="bookForm">
 <h2>{{salon.name}}</h2>
 <h3> {{salon.address}}</h3>
+
+<div fxLayout="row">
+<md-input-container fxFlexOffset="15" fxFlex="35">
+  <input mdInput type="email" placeholder="Your E-mail" [(ngModel)]="email" name="email" required />
+</md-input-container>
+<div fxFlexOffset="10">
+<button md-raised-button class="mat-accent" (click)="book()">BOOK</button>
+</div>
+</div>
+
 <h4>Date: {{date}}</h4>
-
-
 <!--h4>Bookings already done on {{date}}:</h4>
  <ul>
   <li *ngFor="let booking of bookings" >
 	{{booking.count}} for slot {{booking._id.slot + ':00:00'}} 
   </li>
  </ul-->
- 
- 
- 
+  
 <div fxLayout="row">
  
-<div fxFlexOffset="10" fxFlex="45">
-<div>
+<div fxFlexOffset="10" fxFlex="35">
  <md-radio-group [(ngModel)]="selectedTimeSlot" name="selectedTimeSlot" required>
-  <md-list>
-   <md-list-item *ngFor="let slot of salon.timeslots">
-   <md-radio-button [value]="slot">
+	<div *ngFor="let slot of salon.timeslots">
+   <md-radio-button [value]="slot" required>
      {{slot}}
    </md-radio-button>
-  </md-list-item>
-  </md-list>   
+   </div>
 </md-radio-group>
 </div>
-</div>
 
-<div fxFlexOffset="10" fxFlex="45">
+<div fxFlexOffset="10" fxFlex="35">
  <div flex="100" *ngFor="let item of salon.menu">
    <md-checkbox name="ch_serv" [(ngModel)]="item.selected" 
     (change)="recalc_price()">
@@ -45,13 +47,5 @@
 
 </div>
 
-<div fxLayout="row">
-<div fxFlexOffset="10" fxFlex="45">
-  <input mdInput type="email" placeholder="E-mail" [(ngModel)]="email" name="email" required />
-</div>
-<div fxFlexOffset="20">
-<button md-raised-button class="mat-accent" (click)="book()">BOOK</button>
-</div>
-</div>
 
 </form>

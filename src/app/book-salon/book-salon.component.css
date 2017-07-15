@@ -1,0 +1,6 @@
+.my-radio {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex-box;
+    flex-direction: column;
+}
