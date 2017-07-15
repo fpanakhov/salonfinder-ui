@@ -17,20 +17,17 @@
     <div fxFlex="50" fxLayout="row">
       <div fxFlex="70">
 		  Time slots available:
-          <!--md-radio-group class="example-radio-group" [(ngModel)]="selectedTimeSlot">
-            <md-radio-button class="example-radio-button" *ngFor="let slot of topThreeTimeslots" [value]="slot">
-              <div>{{slot}}</div>
-            </md-radio-button>
-          </md-radio-group-->
           <ul>
            <li *ngFor="let slot of topThreeTimeslots" >
              {{slot}}
            </li>
-           <li>... see more</li>
+           <li><a href="" (click)="goToBooking()">... see more</a></li>
           </ul>
       </div>
       <div fxFlex="30">
-          <button md-raised-button class="mat-primary" style="margin-top: 25%; height: 40px; width:150px;">Book</button>
+          <button md-raised-button class="mat-primary" 
+          (click)="goToBooking()"
+          style="margin-top: 25%; height: 40px; width:150px;">Book</button>
         </div>
     </div>
   </div>

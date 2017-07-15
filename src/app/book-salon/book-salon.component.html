@@ -4,6 +4,8 @@
 <form name="bookForm">
 <h2>{{salon.name}}</h2>
 <h3> {{salon.address}}</h3>
+<h4>Date: {{date}}</h4>
+
 
 <!--h4>Bookings already done on {{date}}:</h4>
  <ul>
@@ -17,11 +19,8 @@
 <div fxLayout="row">
  
 <div fxFlexOffset="10" fxFlex="45">
-<div>Date: {{date}}</div>
-
 <div>
- <label>Timeslot</label>
- <md-radio-group [(ngModel)]="selectedTimeSlot" name="selectedTimeSlot">
+ <md-radio-group [(ngModel)]="selectedTimeSlot" name="selectedTimeSlot" required>
   <md-list>
    <md-list-item *ngFor="let slot of salon.timeslots">
    <md-radio-button [value]="slot">
@@ -48,7 +47,7 @@
 
 <div fxLayout="row">
 <div fxFlexOffset="10" fxFlex="45">
-  <input mdInput type="email" placeholder="E-mail" [(ngModel)]="email" name="email" />
+  <input mdInput type="email" placeholder="E-mail" [(ngModel)]="email" name="email" required />
 </div>
 <div fxFlexOffset="20">
 <button md-raised-button class="mat-accent" (click)="book()">BOOK</button>
