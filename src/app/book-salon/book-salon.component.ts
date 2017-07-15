@@ -18,13 +18,19 @@ export class BookSalonComponent implements OnInit {
   bookings: any[] = [];
   selectedTimeSlot: string = '';
   email: string = "";
+  
+  error_msg: string = '';
+  success_msg: string = '';
 
   constructor(
 		private activatedRoute: ActivatedRoute
 		, private salonsService: SalonService) {
   }
   
-  book(){
+  book(){	
+	this.error_msg = '';
+	this.success_msg = '';
+  
 	// TODO: validate email, slot required
 	let booking = new Booking();
 	booking.salonId = this.salon._id;
@@ -36,9 +42,12 @@ export class BookSalonComponent implements OnInit {
 		if (m.selected) booking.services.push(m.name);
     }	
 	this.salonsService.createBooking(booking).subscribe(
-		resp => {
-			// TODO: display some msg
-		} 
+		resp => { },
+		err => { 
+			console.log(err);
+			this.error_msg = 'Failed to book!';
+		},
+		() => { this.success_msg = 'Booking was successfull!'; }
 	);
   }
   
