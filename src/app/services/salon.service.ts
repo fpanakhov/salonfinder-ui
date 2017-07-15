@@ -48,6 +48,10 @@ export class SalonService {
       .map(response => response.json())
       .subscribe(data => salon = data, err => console.log(err), () => console.log('salon registered successfully'));
   }
+  
+  createBooking(booking){
+	return this.http.post('/api/bookings', booking).map(resp => resp.json());
+  }
 
 
   getDistanceMatrix(origin, destination){

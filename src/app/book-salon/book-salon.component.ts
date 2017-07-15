@@ -1,6 +1,7 @@
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import {SalonService} from '../services/salon.service'
+import {Booking} from '../models/booking'
 
 @Component({
   selector: 'app-book-salon',
@@ -15,9 +16,8 @@ export class BookSalonComponent implements OnInit {
   salon: any = {name:"", timeslots: [], address:"", menu: []};
   date: string = "";
   bookings: any[] = [];
-  selectedTimeSlot: string = '14:00:00';
+  selectedTimeSlot: string = '';
   email: string = "";
-  selectedServices = ['haircut', 'irokez'];
 
   constructor(
 		private activatedRoute: ActivatedRoute
@@ -25,7 +25,21 @@ export class BookSalonComponent implements OnInit {
   }
   
   book(){
-	// TODO
+	// TODO: validate email, slot required
+	let booking = new Booking();
+	booking.salonId = this.salon._id;
+	booking.date = new Date(this.date);
+	booking.fromHour = parseInt( this.selectedTimeSlot.substring(0,2) );
+	booking.email = this.email;	
+	booking.services = [];
+	for (let m of this.salon.menu){
+		if (m.selected) booking.services.push(m.name);
+    }	
+	this.salonsService.createBooking(booking).subscribe(
+		resp => {
+			// TODO: display some msg
+		} 
+	);
   }
   
   getSalon(salon_id, date){
@@ -33,7 +47,7 @@ export class BookSalonComponent implements OnInit {
       .subscribe(
         s => {
 			this.salonsService.generateSalonTimeslots(s, new Date(date), '00:00:00', '23:59:00');
-			this.salonsService.checkServicesOffered(s, this.selectedServices);
+			this.salonsService.checkServicesOffered(s, []);
 			this.salon = s;
         },
         error => console.error('Error: ' + error),
