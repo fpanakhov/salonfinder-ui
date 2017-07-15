@@ -36,6 +36,7 @@ import { RegisterSalonComponent } from './register-salon/register-salon.componen
 import { LoginComponent } from './login/login.component';
 import { BookSalonComponent } from './book-salon/book-salon.component';
 import { ConfirmBookingComponent } from './confirm-booking/confirm-booking.component';
+import { CancelBookingComponent } from './cancel-booking/cancel-booking.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent },
@@ -43,7 +44,8 @@ const appRoutes: Routes = [
   {path: 'register', component: RegisterSalonComponent },
   {path: 'login', component: LoginComponent },
   {path: 'salons/:salon_id/book', component: BookSalonComponent},
-  {path: 'bookings/:booking_id/confirm', component: ConfirmBookingComponent }
+  {path: 'bookings/:booking_id/confirm', component: ConfirmBookingComponent },
+  {path: 'bookings/:booking_id/cancel', component: CancelBookingComponent }
 ];
 
 
@@ -57,7 +59,8 @@ const appRoutes: Routes = [
     RegisterSalonComponent,
     LoginComponent,
     BookSalonComponent,
-    ConfirmBookingComponent
+    ConfirmBookingComponent,
+    CancelBookingComponent
   ],
   imports: [
     BrowserModule,
