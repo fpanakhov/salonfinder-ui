@@ -36,7 +36,7 @@ export class SearchResultComponent implements OnInit {
   
   goToBooking(){
     let yearstr = this.date.getFullYear().toString();
-    let monthstr = this.date.getMonth().toString();
+    let monthstr = (this.date.getMonth()+1).toString();
     if (monthstr.length == 1) monthstr = '0' + monthstr;
     let datestr = this.date.getDate();
     if (datestr.length == 1) datestr = '0' + datestr;
