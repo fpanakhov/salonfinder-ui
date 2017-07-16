@@ -1,4 +1,9 @@
 <md-card>
+  <div [hidden]="!redirectFromRegister">
+    <div style="color:green; font-size: 15px;">
+      {{redirectFromRegisterMsg}}
+    </div>
+  </div>
   <form>
     <div fxLayout="row">
       <md-input-container fxFlexOffset="25" fxFlex="25">

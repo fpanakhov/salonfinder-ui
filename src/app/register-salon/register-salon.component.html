@@ -1,4 +1,9 @@
 <md-card>
+  <div [hidden]="!error">
+    <div style="color:darkred; font-size: 13px;">
+      {{errorMsg}}
+    </div>
+  </div>
   <form #salonRegistration="ngForm" (ngSubmit)="registerSalon()">
     User Information
     <hr>

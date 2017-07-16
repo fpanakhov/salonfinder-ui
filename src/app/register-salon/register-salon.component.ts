@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SalonService} from '../services/salon.service';
 import {MenuItem} from '../models/menuitem';
 import {Salon} from '../models/salon'
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -17,7 +18,9 @@ export class RegisterSalonComponent implements OnInit {
   selectedServicePrice: number;
   newServiceError: boolean;
   days: string[];
-  constructor(private salonService: SalonService) {
+  error: boolean;
+  errorMsg; string;
+  constructor(private salonService: SalonService, private router: Router) {
     this.salon = new Salon();
     this.days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 
@@ -63,7 +66,18 @@ export class RegisterSalonComponent implements OnInit {
       this.salon.schedule[day].from = this.convertTimeToNumber(this.salon.schedule[day].from);
       this.salon.schedule[day].to = this.convertTimeToNumber(this.salon.schedule[day].to);
     }
-    this.salonService.register(this.salon);
+    this.salonService.register(this.salon)
+      .subscribe(data => console.log(data),
+        (err) => {
+          this.error = true;
+          if (err.status === 409) {
+            this.errorMsg = 'A salon with same email id is already registered';
+          }
+          else {
+            this.errorMsg = err.message;
+          }
+        },
+        () => {console.log('salon registered successfully'); this.router.navigate(['/login'], {queryParams: {redirectFromRegister: true}})});
   }
 
   convertTimeToNumber(time) {

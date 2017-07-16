@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,12 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  redirectFromRegister: boolean;
+  redirectFromRegisterMsg: string;
+
+  constructor(private route: ActivatedRoute) {
+    this.redirectFromRegisterMsg = 'Salon created successfully!!';
+  }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      // Defaults to 0 if no query param provided.
+      this.redirectFromRegister = params.redirectFromRegister;
+    });
   }
 
   login(){
-    console.log('loggin in ')
+    console.log('loggin in ');
+  }
+  logout(){
+    console.log('loggin out');
   }
 }
