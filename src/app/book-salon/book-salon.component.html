@@ -1,14 +1,36 @@
-
+<div class="center">
 <h1>Salon Booking</h1>
 
 <form name="bookForm">
-<h2>{{salon.name}}</h2>
-<h3> {{salon.address}}</h3>
+<h2> Salon: {{salon.name}}</h2>
+<h3> Address: {{salon.address}}</h3>
 
 <div fxLayout="row">
+<!--<md-input-container class="md-icon-float md-block" flex-gt-sm>
+    <label>Your Email</label>
+        <input md-input
+            id="contact-email"
+            type="text"
+            ngControl="email"
+            #email="ngForm"
+            [(ngModel)]="contact.email"
+            name="email"
+            required
+            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+
+    <div class="md-errors-spacer" [hidden]="email.valid || email.untouched">
+        <div class="md-char-counter" *ngIf="email.errors && email.errors.required">
+            Email is required
+        </div>
+        <div class="md-char-counter" *ngIf="email.errors && email.errors.pattern">
+            Email is invalid
+        </div>
+    </div>
+</md-input-container>-->
 <md-input-container fxFlexOffset="15" fxFlex="35">
   <input mdInput type="email" placeholder="Your E-mail" [(ngModel)]="email" name="email" required />
 </md-input-container>
+
 <div fxFlexOffset="10">
 <button md-raised-button class="mat-accent" (click)="book()">BOOK</button>
 </div>
@@ -21,8 +43,8 @@
 {{error_msg}}
 </div>
 
-<h4>Date: {{date}}</h4>
-<!--h4>Bookings already done on {{date}}:</h4>
+<h3>Date: {{date}}</h3>
+<!--h3>Bookings already done on {{date}}:</h3>
  <ul>
   <li *ngFor="let booking of bookings" >
 	{{booking.count}} for slot {{booking._id.slot + ':00:00'}} 
@@ -48,11 +70,11 @@
     {{ item.name }}
    </md-checkbox>
  </div>
- <div>Total Price : {{salon.totalPriceForSelectedServices}}</div>
+
+ <div><h2>Total Price : {{salon.totalPriceForSelectedServices}} euro</h2></div>
 
 </div>
-
 </div>
-
 
 </form>
+</div>

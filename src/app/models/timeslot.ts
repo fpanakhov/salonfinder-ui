@@ -1,4 +1,4 @@
 export class TimeSlot {
-  from: number;
-  to: number;
+  from: string;
+  to: string;
 }
