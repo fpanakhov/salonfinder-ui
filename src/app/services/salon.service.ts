@@ -145,6 +145,11 @@ export class SalonService {
       .subscribe(data => salon = data, err => console.log(err), () => console.log('salon saved successfully'));
   }
 
+  delete(salon_id) {
+    this.http.delete('api/salons/'+ salon_id)
+      .map(response => response.json());
+  }
+
   getSalonServices() {
     const url = '/api/salon-services/';
     return this.http.get(url)
