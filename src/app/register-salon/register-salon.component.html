@@ -1,5 +1,5 @@
 <md-card>
-  <form>
+  <form #salonRegistration="ngForm" (ngSubmit)="registerSalon()">
     User Information
     <hr>
     <div fxLayout="row">
@@ -31,17 +31,38 @@
       </md-input-container>
     </div>
     Services
-    <button md-icon-button (click)="addMenuItem()"><md-icon>add</md-icon></button>
     <hr>
-    <div fxLayout="row" *ngFor="let menuItem of salon.menu">
-      <md-input-container fxFlexOffset="25" fxFlex="25">
-        <input mdInput placeholder="Service Name" name="service-name" [(ngModel)]="menuItem.name" >
-      </md-input-container>
-      <md-input-container fxFlexOffset="5" fxFlex="25">
-        <input mdInput type="number" placeholder="Price" name="price" [(ngModel)]="menuItem.price" >
-      </md-input-container>
-      <button md-icon-button (click)="deleteMenuItem(menuItem)"><md-icon>close</md-icon></button>
+    <div fxLayout="row" *ngFor="let menuItem of salon.menu; let i=index" [attr.data-index]="i">
+      <span fxFlexOffset="20" fxFlex="5" style="margin: 0.5em 0;">
+        {{i+1}}
+      </span>
+      <span fxFlex="20" style="text-align: left;margin: 0.5em 0;">
+        {{menuItem.name}}
+      </span>
+      <span fxFlexOffset="5" fxFlex="20" style="margin: 0.5em 0;">
+        {{menuItem.price}}
+      </span>
+      <span fxFlex="5">
+        <button md-icon-button (click)="deleteMenuItem(menuItem)"><md-icon>close</md-icon></button>
+      </span>
     </div>
+    <div fxLayout="row">
+      <md-select fxFlexOffset="25" fxFlex="25" placeholder="Service Name" name="service-name" [(ngModel)]="selectedServiceName" style="margin: 0.5em 0;">
+        <md-option *ngFor="let service of salonServices" [value]="service">
+          {{service}}
+        </md-option>
+      </md-select>
+      <md-input-container fxFlexOffset="5" fxFlex="25">
+        <input mdInput type="number" placeholder="Price" name="price" [(ngModel)]="selectedServicePrice" >
+      </md-input-container>
+      <a (click)="addMenuItem()" style="font-style: italic; text-decoration: underline; cursor: pointer;"><md-icon>add</md-icon></a>
+    </div>
+    <div [hidden]="!newServiceError">
+      <div style="color:darkred; font-size: 13px;">
+        Please enter service name and price.
+      </div>
+    </div>
+    <br>
 
     Working hours
     <hr>
@@ -147,7 +168,7 @@
     <hr>
     <div fxLayout="row">
       <div fxFlexOffset="70">
-        <button md-raised-button class="mat-accent" (click)="registerSalon()">Register</button>
+        <button type="submit" md-raised-button class="mat-accent" [disabled]="!salonRegistration.form.valid">Register</button>
       </div>
     </div>
   </form>
