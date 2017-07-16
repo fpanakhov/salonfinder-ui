@@ -16,12 +16,25 @@ export class SalonsComponent implements OnInit {
 
   from: any = '10:00:00';
   to: any = '18:00:00';
+  
+  checked: any[] = [false, false, false, false, false, false, false, false, false, false, false, false];
+  services: any[] = ['haircut', 'nails', 'styling', 'pedicure', 'massage', 'beardcut', 'shaving',
+                    "women's cut", 'sauna', 'beard coloring', 'manicure', 'irokez'];
 
   private salons;
 
   constructor(private salonsService: SalonService) { }
   
-  filterByLocation(salons, bookings){
+  get selectedServices(){
+    let selected: any[] = [];
+    for(let i=0; i<this.checked.length; ++i){
+        if (this.checked[i])
+            selected.push(this.services[i]);
+    }
+    return selected;
+  }
+  
+  filterByLocation(salons){
     var origins: string = '';
     salons.map((item, index) => { origins+=item.address; origins+='|'; });
     
@@ -38,30 +51,32 @@ export class SalonsComponent implements OnInit {
           }
 
           var arr1: any[] = [];
-          for (let i = 0; i<salons.length; i++){
-            if (salons[i].distance <= this.distance * 1000){
-              arr1.push(salons[i]);
+          for (let salon of salons){
+            if (salon.distance <= this.distance * 1000){
+              if (false == this.salonsService.checkServicesOffered(salon, this.selectedServices))
+                    continue;
+            
+              if (this.salonsService
+                        .generateSalonTimeslots(
+                            salon, this.dateOfBooking, this.from, this.to)){ 
+                arr1.push(salon);
+              }
             }
           }
-          
-          arr1.map(s => this.setBookings(s, bookings));          
+                   
           this.salons = arr1;
         },
         error => { this.location = error; },
         () => {} );
   }
   
-  setBookings(salon, bookings){
-      // TODO: salon.bookings = dictionary[timeslot, numberofbookings];
-  }
-
-  getSalons(bookings) {
+  getSalons() {
     this.salonsService.getSalons()
       .subscribe(
         salons => {
           let arr: any[] = [];
           salons.map(s => arr.push(s));
-          this.filterByLocation(arr, bookings);
+          this.filterByLocation(arr);
         },
         error => console.error('Error: ' + error),
         () => console.log('Completed!')
@@ -69,47 +84,12 @@ export class SalonsComponent implements OnInit {
   }
 
   search(){
-    this.salonsService.getBookings(this.dateOfBooking)
-        .subscribe(
-            bookings => {
-                this.getSalons(bookings);
-            }
-        );
+    this.getSalons();
   }
-                                                                                                                                                                                            
+                                                                                                                                                                                           
   ngOnInit() {
     this.search();
   }
-  
-  
-  
-  hasSlotsAvailable(salon, bookings){
-    let result: any[] = [];
-    const slotSize = 1;
-    let day: number = this.dateOfBooking.getDay();
-    let ds: any = null;
-    switch(day){
-        case 1: { ds = salon.schedule.mon; break; }
-        case 2: { ds = salon.schedule.tue; break; }
-        case 3: { ds = salon.schedule.wed; break; }
-        case 4: { ds = salon.schedule.thu; break; }
-        case 5: { ds = salon.schedule.fri; break; }
-        case 6: { ds = salon.schedule.sat; break; }
-        case 0: { ds = salon.schedule.sun; break; }
-    }
-    
-    let from = ds.from;
-    let to = ds.to;
-    let maxBookings = salon.personnel;
-    
-    while (from < to){
-        // TODO: check if bookingCount for the slot < maxBookings
-        // 
-        result.push(from);
-        from += slotSize;
-    }
-    
-    return result;    
-  }
+
 }
 

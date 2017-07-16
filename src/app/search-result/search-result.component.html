@@ -5,27 +5,29 @@
         <h2 style="margin: 0px;">{{name}}</h2><span style="margin: auto auto auto 0">, {{address}}</span>
       </div>
       <div>
-        <h5>Estimated Price : {{price}} Euros | Distance(From your location) : {{distance}} m</h5>
+        <h5>Estimated Price : {{totalPriceForSelectedServices}} Euros | Distance(From your location) : {{distance}} m</h5>
       </div>
       <div>
         <md-chip-list>
-          <md-chip *ngFor="let menuItem of menu">{{menuItem.name}}</md-chip>
+          <md-chip *ngFor="let menuItem of menu" [selected]="menuItem.selected == true ? true : false">{{menuItem.name}}</md-chip>
         </md-chip-list>
       </div>
     </div>
 
     <div fxFlex="50" fxLayout="row">
       <div fxFlex="70">
-        <li *ngFor="let slot of schedule">
-          <md-radio-group class="example-radio-group" [(ngModel)]="selectedTimeSlot">
-            <md-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="">
-              {{slot.from}} - {{slot.to}}
-            </md-radio-button>
-          </md-radio-group>
-        </li>
+		  Time slots available:
+          <ul>
+           <li *ngFor="let slot of topThreeTimeslots" >
+             {{slot}}
+           </li>
+           <li><a href="" (click)="goToBooking()">... see more</a></li>
+          </ul>
       </div>
       <div fxFlex="30">
-          <button md-raised-button class="mat-primary" style="margin-top: 25%; height: 40px; width:150px;">Book</button>
+          <button md-raised-button class="mat-primary" 
+          (click)="goToBooking()"
+          style="margin-top: 25%; height: 40px; width:150px;">Book</button>
         </div>
     </div>
   </div>
