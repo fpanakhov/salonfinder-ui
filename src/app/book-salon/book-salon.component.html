@@ -1,9 +1,9 @@
-
+<div class="center">
 <h1>Salon Booking</h1>
 
 <form name="bookForm">
-<h2>{{salon.name}}</h2>
-<h3> {{salon.address}}</h3>
+<h2> Salon: {{salon.name}}</h2>
+<h3> Address: {{salon.address}}</h3>
 
 <div fxLayout="row">
 <md-input-container fxFlexOffset="15" fxFlex="35">
@@ -21,8 +21,8 @@
 {{error_msg}}
 </div>
 
-<h4>Date: {{date}}</h4>
-<!--h4>Bookings already done on {{date}}:</h4>
+<h3>Date: {{date}}</h3>
+<!--h3>Bookings already done on {{date}}:</h3>
  <ul>
   <li *ngFor="let booking of bookings" >
 	{{booking.count}} for slot {{booking._id.slot + ':00:00'}} 
@@ -48,11 +48,11 @@
     {{ item.name }}
    </md-checkbox>
  </div>
- <div>Total Price : {{salon.totalPriceForSelectedServices}}</div>
+
+ <div><h2>Total Price : {{salon.totalPriceForSelectedServices}} euros</h2></div>
 
 </div>
-
 </div>
-
 
 </form>
+</div>
