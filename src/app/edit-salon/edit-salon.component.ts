@@ -1,7 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {SalonService} from '../services/salon.service';
 import {MenuItem} from '../models/menuitem';
-import {Salon} from '../models/salon'
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -13,17 +12,18 @@ import { Location } from '@angular/common';
   providers: [SalonService]
 })
 export class EditSalonComponent implements OnInit {
-  salon: Salon;
+  salon: any;
+  id;
 
   constructor(private salonService: SalonService, private route: ActivatedRoute, private location: Location) {
-
   }
 
   ngOnInit() {
-    this.route.paramMap
-      .switchMap((params: ParamMap) => this.salonService.getSalon(+params.get('id')))
-      .subscribe(salon => this.salon = salon);
-    this.addMenuItem();
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
+      this.salonService.getSalon(this.id)
+        .subscribe(salon => this.salon = salon);
+    })
   }
 
   addMenuItem() {
@@ -35,11 +35,7 @@ export class EditSalonComponent implements OnInit {
     }
   }
   saveSalon() {
-    this.salonService.update(this.salon);
-  }
-
-  goBack(): void {
-    this.location.back();
+    this.salonService.update(this.salon, this.id);
   }
 }
 
