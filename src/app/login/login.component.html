@@ -7,11 +7,11 @@
   <form>
     <div fxLayout="row">
       <md-input-container fxFlexOffset="25" fxFlex="25">
-        <input mdInput type="email" placeholder="Email" name="email" required>
+        <input mdInput type="email" placeholder="Email" name="email" [(ngModel)]="email" required>
       </md-input-container>
 
       <md-input-container fxFlexOffset="5" fxFlex="25">
-        <input mdInput type="password" placeholder="Password" name="password" required>
+        <input mdInput type="password" placeholder="Password" name="password" [(ngModel)]="password" required>
       </md-input-container>
     </div>
     <hr>

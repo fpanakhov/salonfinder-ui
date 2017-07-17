@@ -12,14 +12,17 @@
         <a md-button routerLink="./salons">Contact</a>
       </span>
       <span class="toolbar-spacer"></span>
-      <!--<md-menu #appMenu="mdMenu" yPosition="above">-->
-        <!--<button md-menu-item> Settings </button>-->
-        <!--<button md-menu-item> Logout </button>-->
-      <!--</md-menu>-->
-      <!--<button md-icon-button [mdMenuTriggerFor]="appMenu">-->
-        <!--<md-icon>more_vert</md-icon>-->
-      <!--</button>-->
 
-    <a routerLink="login" md-button class="mat-primary">Log In</a>
-    <a routerLink="register" md-button class="mat-primary">Register</a>
+
+      <md-menu #menu="mdMenu" yPosition="above">
+        <button md-menu-item> My Salon </button>
+        <button md-menu-item (click)="logout()"> Logout </button>
+      </md-menu>
+
+      <button md-icon-button [mdMenuTriggerFor]="menu" *ngIf="isAuthenticated()">
+        <md-icon>account_circle</md-icon>
+      </button>
+
+    <a routerLink="login" md-button class="mat-primary" *ngIf="!isAuthenticated()">Log In</a>
+    <a routerLink="register" md-button class="mat-primary" *ngIf="!isAuthenticated()">Register</a>
 </md-toolbar>

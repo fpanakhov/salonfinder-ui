@@ -1,17 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {LoginService} from '../services/login.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [LoginService]
 })
 export class LoginComponent implements OnInit {
 
   redirectFromRegister: boolean;
   redirectFromRegisterMsg: string;
+  email: string;
+  password: string;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private loginService: LoginService, private router: Router) {
     this.redirectFromRegisterMsg = 'Salon created successfully!!';
   }
 
@@ -22,10 +26,12 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  login(){
+  login() {
     console.log('loggin in ');
+    this.loginService.login(this.email, this.password)
+      .subscribe(data => localStorage['jwtToken']=data.token, err => console.log(err), () => {console.log('login success'); this.router.navigateByUrl('/salons')});
   }
-  logout(){
+  logout() {
     console.log('loggin out');
   }
 }

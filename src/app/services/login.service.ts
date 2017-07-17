@@ -1,16 +1,33 @@
 import { Injectable } from '@angular/core';
-import {Http, Headers, RequestOptions, Response} from '@angular/http';
+import {Http} from '@angular/http';
 
 @Injectable()
 export class LoginService {
   constructor(private http: Http) { }
 
-  login(email, password){
-    // this.http.post('http://localhost:3000/api/salons', salon)
-    //   .map(response => response.json())
+  login(email, password) {
+    return this.http.post('/api/salons/login', {
+      email: email,
+      password: password
+    })
+  .map(response => response.json());
     //   .subscribe(data => salon = data, err => console.log(err), () => console.log('salon registered successfully'));
   }
-  logout(){
-
+  logout() {
+    localStorage.removeItem('jwtToken')
   }
+
+  getCurrentUser() {
+    const token = localStorage['jwtToken'];
+    if (!token){ return {};}
+
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace('-', '+').replace('_', '/');
+    return JSON.parse(atob(base64)).salon;
+  }
+
+  isAuthenticated() {
+    return !!localStorage['jwtToken'];
+  }
+
 }
