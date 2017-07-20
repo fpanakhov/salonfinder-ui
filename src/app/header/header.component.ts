@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginService} from '../services/login.service';
 import {Router} from '@angular/router';
+import { Salon } from "app/models/salon";
 
 @Component({
   selector: 'app-header',
@@ -28,5 +29,10 @@ export class HeaderComponent implements OnInit {
   logout(){
     this.loginService.logout();
     this.router.navigateByUrl('/');
+  }
+
+  myRouter(){
+    let salon = this.loginService.getCurrentUser();
+    this.router.navigateByUrl('/salons/'+ salon._id + '/edit');
   }
 }
