@@ -1,47 +1,27 @@
 <div class="center">
 <h1>Salon Booking</h1>
 
-<form name="bookForm">
+<form name="bookForm"  #f="ngForm" (submit)="book(f);"  novalidate>
 <h2> Salon: {{salon.name}}</h2>
 <h3> Address: {{salon.address}}</h3>
 
 <div fxLayout="row">
-<!--<md-input-container class="md-icon-float md-block" flex-gt-sm>
-    <label>Your Email</label>
-        <input md-input
-            id="contact-email"
-            type="text"
-            ngControl="email"
-            #email="ngForm"
-            [(ngModel)]="contact.email"
-            name="email"
-            required
-            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
 
-    <div class="md-errors-spacer" [hidden]="email.valid || email.untouched">
-        <div class="md-char-counter" *ngIf="email.errors && email.errors.required">
-            Email is required
-        </div>
-        <div class="md-char-counter" *ngIf="email.errors && email.errors.pattern">
-            Email is invalid
-        </div>
-    </div>
-</md-input-container>-->
-<md-input-container fxFlexOffset="15" fxFlex="35">
-  <input mdInput type="email" placeholder="Your E-mail" [(ngModel)]="email" name="email" required />
+<md-input-container fxFlexOffset="15" fxFlex="35">  
+    <input mdInput placeholder="Email" [formControl]="emailFormControl" [(ngModel)]="email" name="email" formGroupName="email">
+    <md-error *ngIf="emailFormControl.hasError('pattern')">
+      Please enter a valid email address
+    </md-error>
+    <md-error *ngIf="emailFormControl.hasError('required')">
+      Email is <strong>required</strong>
+    </md-error>
 </md-input-container>
 
 <div fxFlexOffset="10">
-<button md-raised-button class="mat-accent" (click)="book()">BOOK</button>
+<button md-raised-button type="submit" class="mat-accent" [disabled]="!f.form.valid">BOOK</button>
 </div>
 </div>
 
-<div class="alert alert-success" ng-show="showSuccessAlert">
-{{success_msg}}
-</div>
-<div>
-{{error_msg}}
-</div>
 
 <h3>Date: {{date}}</h3>
 <!--h3>Bookings already done on {{date}}:</h3>
@@ -78,3 +58,4 @@
 
 </form>
 </div>
+

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HttpModule } from '@angular/http';
 
@@ -19,7 +19,8 @@ import {MaterialModule,
         MdDatepickerModule,
         MdNativeDateModule,
         MdGridListModule,
-        MdIconRegistry} from '@angular/material';
+        MdIconRegistry,
+        MdDialogModule} from '@angular/material';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -35,7 +36,7 @@ import { HomeComponent } from './home/home.component';
 import { RegisterSalonComponent } from './register-salon/register-salon.component';
 import { LoginComponent } from './login/login.component';
 import { EditSalonComponent } from './edit-salon/edit-salon.component';
-import { BookSalonComponent } from './book-salon/book-salon.component';
+import { BookSalonComponent, FailureDialogComponent, SuccessDialogComponent } from './book-salon/book-salon.component';
 import { ConfirmBookingComponent } from './confirm-booking/confirm-booking.component';
 import { CancelBookingComponent } from './cancel-booking/cancel-booking.component';
 
@@ -63,13 +64,15 @@ const appRoutes: Routes = [
     LoginComponent,
     BookSalonComponent,
     ConfirmBookingComponent,
-    CancelBookingComponent
+    CancelBookingComponent,
+    FailureDialogComponent, SuccessDialogComponent
   ],
+  entryComponents: [ FailureDialogComponent, SuccessDialogComponent ],
   imports: [
     BrowserModule,
     HttpModule,
     BrowserAnimationsModule,
-    MaterialModule, FormsModule,
+    MaterialModule, FormsModule, ReactiveFormsModule, MdDialogModule,
     MdButtonModule, MdCheckboxModule, MdInputModule, MdToolbarModule, MdMenuModule, MdSelectModule, MdIconModule, MdGridListModule, MdDatepickerModule,
     FlexLayoutModule,
     RouterModule.forRoot(appRoutes),
